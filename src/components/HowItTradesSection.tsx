@@ -49,12 +49,12 @@ export default function HowItTradesSection() {
           </div>
 
           <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
-            The <span className="gold-text">Apex Edge™</span>
+            The <span className="gold-text">GTM PRO Edge™</span>
           </h2>
 
           <p className="mt-6 text-base sm:text-lg lg:text-xl leading-relaxed text-zinc-300 font-normal">
             The problem was never your strategy. It was the moment between seeing the setup and
-            acting on it. Both Apex Gold Algo and Apex Gold Algo Pro use the same Apex Edge, the
+            acting on it. Both GTM PRO and GTM PRO White-Label use the same GTM Edge, the
             five-step system that removes that moment completely. It watches Gold, waits for the
             conditions it was built to find, gets in, manages the exit, and closes, every single
             time. You set the risk per trade. The system follows it without hesitation.
@@ -103,7 +103,7 @@ export default function HowItTradesSection() {
                   <span className="h-3 w-3 rounded-full bg-amber-500/80 inline-block" />
                   <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
                   <span className="ml-3 hidden sm:inline text-xs font-mono font-semibold text-zinc-400">
-                    XAUUSD · Apex Edge™ Algorithm Execution
+                    XAUUSD · GTM PRO Edge™ Algorithm Execution
                   </span>
                 </div>
 
@@ -120,7 +120,7 @@ export default function HowItTradesSection() {
                 <div className="relative w-full max-w-full sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] overflow-hidden rounded-xl border border-white/[0.08] shadow-inner bg-black">
                   <NextImage
                     src="/chart.gif"
-                    alt="Apex Edge Gold Algo Live Chart Animation"
+                    alt="GTM PRO Live Chart Animation"
                     width={1000}
                     height={1000}
                     unoptimized

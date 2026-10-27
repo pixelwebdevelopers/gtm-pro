@@ -4,7 +4,8 @@ import React, { useState, useRef, useCallback } from "react";
 import NextImage from "next/image";
 
 export default function ChartComparisonSection() {
-  const [sliderPosition, setSliderPosition] = useState(50);
+  // Always initially show GTM Algo on 80% of the chart (slider at 20%)
+  const [sliderPosition, setSliderPosition] = useState(20);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -86,7 +87,7 @@ export default function ChartComparisonSection() {
 
           <div className="mt-4 inline-flex items-center gap-2 text-xs font-black tracking-wider text-[#E8C97A] uppercase">
             <span className="rounded-md bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-2.5 py-1">
-              Apex Gold Algo
+              GTM PRO ALGO
             </span>
             <span className="text-zinc-500">•</span>
             <span className="text-zinc-400">Interactive Split Comparison</span>
@@ -119,13 +120,13 @@ export default function ChartComparisonSection() {
                       : "bg-white/[0.05] text-zinc-400 hover:text-white hover:bg-white/10"
                   }`}
                 >
-                  Raw Candles (100%)
+                  Raw Candles
                 </button>
                 <button
                   type="button"
                   onClick={() => setSliderPosition(50)}
                   className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                    sliderPosition > 2 && sliderPosition < 98
+                    sliderPosition > 25 && sliderPosition < 75
                       ? "bg-[#C9A84C] text-black shadow"
                       : "bg-white/[0.05] text-zinc-400 hover:text-white hover:bg-white/10"
                   }`}
@@ -134,14 +135,14 @@ export default function ChartComparisonSection() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setSliderPosition(0)}
+                  onClick={() => setSliderPosition(20)}
                   className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                    sliderPosition <= 2
+                    sliderPosition <= 25
                       ? "bg-[#C9A84C] text-black shadow"
                       : "bg-white/[0.05] text-zinc-400 hover:text-white hover:bg-white/10"
                   }`}
                 >
-                  Algo Signals (100%)
+                  GTM Algo (80%)
                 </button>
               </div>
             </div>
@@ -158,7 +159,7 @@ export default function ChartComparisonSection() {
               <div className="absolute inset-0 h-full w-full pointer-events-none select-none bg-black">
                 <NextImage
                   src="/after-chart.png"
-                  alt="Apex Gold Algo With Marked Entries and Exits"
+                  alt="GTM PRO ALGO With Marked Entries and Exits"
                   fill
                   sizes="(max-width: 1024px) 100vw, 1000px"
                   className="object-contain"
@@ -183,9 +184,9 @@ export default function ChartComparisonSection() {
                 />
               </div>
 
-              {/* Before Badge (Left Side) */}
+              {/* Before Badge (Left Side) - Hidden on Mobile */}
               <div
-                className={`absolute top-4 left-4 z-20 transition-opacity duration-200 pointer-events-none ${
+                className={`absolute top-4 left-4 z-20 transition-opacity duration-200 pointer-events-none hidden sm:flex ${
                   sliderPosition < 15 ? "opacity-0" : "opacity-100"
                 }`}
               >
@@ -197,16 +198,16 @@ export default function ChartComparisonSection() {
                 </div>
               </div>
 
-              {/* After Badge (Right Side) */}
+              {/* After Badge (Right Side) - Hidden on Mobile */}
               <div
-                className={`absolute top-4 right-4 z-20 transition-opacity duration-200 pointer-events-none ${
+                className={`absolute top-4 right-4 z-20 transition-opacity duration-200 pointer-events-none hidden sm:flex ${
                   sliderPosition > 85 ? "opacity-0" : "opacity-100"
                 }`}
               >
                 <div className="flex items-center gap-2 rounded-xl border border-[#C9A84C]/50 bg-black/75 px-3 py-1.5 backdrop-blur-md shadow-lg">
                   <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-xs font-black tracking-wide text-[#E8C97A]">
-                    APEX GOLD ALGO · AFTER
+                    GTM PRO ALGO · AFTER
                   </span>
                 </div>
               </div>
@@ -227,8 +228,8 @@ export default function ChartComparisonSection() {
                 </div>
               </div>
 
-              {/* Drag instruction overlay hint */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+              {/* Drag instruction overlay hint - Hidden on Mobile */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none hidden sm:block">
                 <span className="rounded-full border border-white/15 bg-black/75 px-3.5 py-1 text-[11px] font-semibold text-zinc-300 backdrop-blur-md shadow">
                   ← Drag handle or click anywhere to compare →
                 </span>
