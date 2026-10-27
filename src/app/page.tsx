@@ -3,6 +3,7 @@ import ParticleHero from "@/components/ParticleHero";
 import StatsBar from "@/components/StatsBar";
 import FeaturesSection from "@/components/FeaturesSection";
 import HowItTradesSection from "@/components/HowItTradesSection";
+import ChartComparisonSection from "@/components/ChartComparisonSection";
 import LivePerformanceSection from "@/components/LivePerformanceSection";
 import PricingSection from "@/components/PricingSection";
 import HowToGetFreeSection from "@/components/HowToGetFreeSection";
@@ -18,6 +19,7 @@ export default function Home() {
       <StatsBar />
       <FeaturesSection />
       <HowItTradesSection />
+      <ChartComparisonSection />
       <LivePerformanceSection />
       <PricingSection />
       <HowToGetFreeSection />

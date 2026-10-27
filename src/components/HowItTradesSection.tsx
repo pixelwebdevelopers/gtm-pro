@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import NextImage from "next/image";
 
 export default function HowItTradesSection() {
   const fiveSteps = [
@@ -89,7 +90,7 @@ export default function HowItTradesSection() {
 
         {/* The .GIF Showcase Display */}
         <div className="mt-16 sm:mt-20">
-          <div className="relative mx-auto max-w-4xl">
+          <div className="relative mx-auto max-w-3xl">
             {/* Ambient Gold Aura behind GIF container */}
             <div className="absolute -inset-4 sm:-inset-6 rounded-[2.5rem] bg-[#C9A84C]/20 blur-3xl pointer-events-none" />
 
@@ -114,14 +115,17 @@ export default function HowItTradesSection() {
                 </div>
               </div>
 
-              {/* Animated GIF Body */}
+              {/* Animated GIF Body - Responsive: Full on mobile, comfortably sized on desktop */}
               <div className="p-3 sm:p-5 flex items-center justify-center bg-black/80">
-                <div className="relative w-full max-w-[800px] overflow-hidden rounded-xl border border-white/[0.08] shadow-inner bg-black">
-                  <img
+                <div className="relative w-full max-w-full sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] overflow-hidden rounded-xl border border-white/[0.08] shadow-inner bg-black">
+                  <NextImage
                     src="/chart.gif"
                     alt="Apex Edge Gold Algo Live Chart Animation"
-                    className="w-full h-auto object-contain block mx-auto"
-                    loading="lazy"
+                    width={1000}
+                    height={1000}
+                    unoptimized
+                    className="w-full h-auto max-h-[380px] sm:max-h-[440px] md:max-h-[470px] object-contain block mx-auto"
+                    priority
                   />
                 </div>
               </div>
