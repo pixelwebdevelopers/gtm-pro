@@ -16,6 +16,13 @@ interface Particle {
 export default function ParticleHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [activeInterval, setActiveInterval] = useState("15");
+  const [isChartLoading, setIsChartLoading] = useState(false);
+
+  const handleIntervalChange = (val: string) => {
+    if (val === activeInterval) return;
+    setIsChartLoading(true);
+    setActiveInterval(val);
+  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -281,27 +288,28 @@ export default function ParticleHero() {
         </div>
 
         {/* Right Column: The Glowing Live Gold Chart */}
-        <div className="relative w-full">
+        <div className="relative w-full -mx-3.5 sm:mx-0 w-[calc(100%+1.75rem)] sm:w-full">
           {/* Ambient Gold Aura behind chart */}
           <div className="absolute -inset-4 rounded-[2.5rem] bg-[#C9A84C]/25 blur-3xl pointer-events-none" />
 
           {/* Outer Glass Card */}
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/[0.07] p-3 sm:p-4 shadow-2xl shadow-black/80 backdrop-blur-2xl">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-white/[0.07] p-1.5 sm:p-4 pt-2.5 sm:pt-4 shadow-2xl shadow-black/80 backdrop-blur-2xl">
             {/* Terminal Bar Header */}
-            <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10 px-2">
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#C9A84C]/20 border border-[#C9A84C]/40 font-mono text-xs font-black text-[#E8C97A]">
+            <div className="flex items-center justify-between pb-2.5 sm:pb-3 mb-2.5 sm:mb-3 border-b border-white/10 px-2">
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <span className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-lg bg-[#C9A84C]/20 border border-[#C9A84C]/40 font-mono text-[11px] sm:text-xs font-black text-[#E8C97A]">
                   AU
                 </span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-white tracking-wide">
-                      XAU/USD · Gold Spot
-                    </span>
-                    <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[10px] font-black text-emerald-400 border border-emerald-500/40 uppercase">
-                      LIVE
-                    </span>
-                  </div>
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
+                    XAU/USD
+                  </span>
+                  <span className="hidden sm:inline text-xs sm:text-sm font-medium text-zinc-400">
+                    · Gold Spot
+                  </span>
+                  <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-black text-emerald-400 border border-emerald-500/40 uppercase">
+                    LIVE
+                  </span>
                 </div>
               </div>
 
@@ -312,8 +320,9 @@ export default function ParticleHero() {
                   return (
                     <button
                       key={val}
-                      onClick={() => setActiveInterval(val)}
-                      className={`px-2.5 py-1 text-xs font-bold rounded-md transition-all ${
+                      type="button"
+                      onClick={() => handleIntervalChange(val)}
+                      className={`px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-bold rounded-md transition-all cursor-pointer active:scale-95 ${
                         activeInterval === val
                           ? "bg-[#C9A84C] text-black shadow"
                           : "text-zinc-400 hover:text-white hover:bg-white/10"
@@ -327,17 +336,27 @@ export default function ParticleHero() {
             </div>
 
             {/* Inner Chart Iframe Container */}
-            <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/60 shadow-inner">
+            <div className="relative overflow-hidden rounded-xl sm:rounded-[1.5rem] border border-white/10 bg-black/60 shadow-inner">
+              {isChartLoading && (
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity">
+                  <div className="h-7 w-7 animate-spin rounded-full border-2 border-[#C9A84C]/25 border-t-[#C9A84C]" />
+                  <span className="mt-2 text-[11px] font-mono font-bold text-[#E8C97A]">
+                    Loading {activeInterval === "D" ? "1D" : activeInterval === "240" ? "4H" : activeInterval === "60" ? "1H" : "15M"} Chart...
+                  </span>
+                </div>
+              )}
               <iframe
+                key={activeInterval}
                 title="Live XAUUSD Gold Chart"
                 src={chartUrl}
-                className="h-[380px] sm:h-[430px] md:h-[460px] w-full border-0"
-                loading="lazy"
+                className="h-[390px] sm:h-[430px] md:h-[460px] w-full border-0"
+                loading="eager"
+                onLoad={() => setIsChartLoading(false)}
               />
             </div>
           </div>
 
-          <p className="mt-3 text-center sm:text-left text-xs leading-relaxed text-zinc-400">
+          <p className="mt-3 px-2 text-center sm:text-left text-xs leading-relaxed text-zinc-400">
             Live chart is for real-time market reference. GTM PRO executes autonomously inside your
             own MetaTrader desktop terminal or VPS.
           </p>

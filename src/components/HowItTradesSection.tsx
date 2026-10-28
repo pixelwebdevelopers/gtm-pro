@@ -95,20 +95,20 @@ export default function HowItTradesSection() {
             <div className="absolute -inset-4 sm:-inset-6 rounded-[2.5rem] bg-[#C9A84C]/20 blur-3xl pointer-events-none" />
 
             {/* Premium Glass Terminal Container */}
-            <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-zinc-950/90 shadow-2xl shadow-black backdrop-blur-2xl">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-zinc-950/90 shadow-2xl shadow-black backdrop-blur-2xl -mx-3 sm:mx-0 w-[calc(100%+1.5rem)] sm:w-full">
               {/* Terminal Title Bar */}
-              <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5 bg-black/60">
+              <div className="flex items-center justify-between border-b border-white/10 px-3 sm:px-5 py-2.5 sm:py-3.5 bg-black/60">
                 <div className="flex items-center gap-2">
                   <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
                   <span className="h-3 w-3 rounded-full bg-amber-500/80 inline-block" />
                   <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
-                  <span className="ml-3 hidden sm:inline text-xs font-mono font-semibold text-zinc-400">
-                    XAUUSD · GTM PRO Edge™ Algorithm Execution
+                  <span className="ml-2 sm:ml-3 text-[11px] sm:text-xs font-mono font-semibold text-zinc-300 sm:text-zinc-400 truncate max-w-[170px] sm:max-w-none">
+                    XAUUSD · GTM PRO Edge™
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-3 py-1 text-[11px] font-black uppercase tracking-wider text-emerald-400">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-emerald-400">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                     <span>Live Execution Demo</span>
                   </span>
@@ -116,8 +116,8 @@ export default function HowItTradesSection() {
               </div>
 
               {/* Animated GIF Body - Responsive: Full on mobile, comfortably sized on desktop */}
-              <div className="p-3 sm:p-5 flex items-center justify-center bg-black/80">
-                <div className="relative w-full max-w-full sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] overflow-hidden rounded-xl border border-white/[0.08] shadow-inner bg-black">
+              <div className="p-1 sm:p-5 flex items-center justify-center bg-black/80">
+                <div className="relative w-full max-w-full sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] overflow-hidden rounded-lg sm:rounded-xl border border-white/[0.08] shadow-inner bg-black">
                   <NextImage
                     src="/chart.gif"
                     alt="GTM PRO Live Chart Animation"

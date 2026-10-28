@@ -48,7 +48,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <p className="mt-4 text-[11px] text-zinc-500">
-          © 2026 GTM PRO · GoldTacticalMachine.com by Abang Rimba. All rights reserved.
+          © 2026 GTM PRO · GoldTacticalMachine.com. All rights reserved.
         </p>
       </div>
     </footer>

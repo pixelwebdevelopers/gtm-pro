@@ -96,25 +96,25 @@ export default function ChartComparisonSection() {
 
         {/* Interactive Comparison Slider Container */}
         <div className="mt-14 mx-auto max-w-5xl">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-black/90 p-3 sm:p-4 shadow-2xl shadow-black backdrop-blur-2xl">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-black/90 p-1.5 sm:p-4 shadow-2xl shadow-black backdrop-blur-2xl -mx-3 sm:mx-0 w-[calc(100%+1.5rem)] sm:w-full">
             {/* Terminal Header */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 px-3 pb-3 mb-3">
+            <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-white/10 px-2 sm:px-3 pb-2.5 sm:pb-3 mb-2.5 sm:mb-3">
               <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
-                <span className="h-3 w-3 rounded-full bg-amber-500/80 inline-block" />
-                <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
-                <span className="ml-2 text-xs font-mono font-bold text-zinc-300">
+                <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-red-500/80 inline-block" />
+                <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-amber-500/80 inline-block" />
+                <span className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-emerald-500/80 inline-block" />
+                <span className="ml-1 sm:ml-2 text-[11px] sm:text-xs font-mono font-bold text-zinc-300">
                   XAU/USD · Execution Comparison
                 </span>
               </div>
 
               {/* Quick Preset Buttons */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1 sm:gap-1.5">
                 <span className="hidden sm:inline text-xs text-zinc-500 font-medium mr-1">View:</span>
                 <button
                   type="button"
                   onClick={() => setSliderPosition(100)}
-                  className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  className={`px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-bold rounded-lg transition-all cursor-pointer active:scale-95 ${
                     sliderPosition >= 98
                       ? "bg-[#C9A84C] text-black shadow"
                       : "bg-white/[0.05] text-zinc-400 hover:text-white hover:bg-white/10"
@@ -125,7 +125,7 @@ export default function ChartComparisonSection() {
                 <button
                   type="button"
                   onClick={() => setSliderPosition(50)}
-                  className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  className={`px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-bold rounded-lg transition-all cursor-pointer active:scale-95 ${
                     sliderPosition > 25 && sliderPosition < 75
                       ? "bg-[#C9A84C] text-black shadow"
                       : "bg-white/[0.05] text-zinc-400 hover:text-white hover:bg-white/10"
@@ -136,7 +136,7 @@ export default function ChartComparisonSection() {
                 <button
                   type="button"
                   onClick={() => setSliderPosition(20)}
-                  className={`px-3 py-1 text-xs font-bold rounded-lg transition-all cursor-pointer ${
+                  className={`px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-bold rounded-lg transition-all cursor-pointer active:scale-95 ${
                     sliderPosition <= 25
                       ? "bg-[#C9A84C] text-black shadow"
                       : "bg-white/[0.05] text-zinc-400 hover:text-white hover:bg-white/10"
@@ -152,7 +152,7 @@ export default function ChartComparisonSection() {
               ref={containerRef}
               onMouseDown={handleMouseDown}
               onTouchStart={handleTouchStart}
-              className="relative w-full aspect-[16/9] overflow-hidden rounded-2xl bg-black cursor-ew-resize select-none touch-none"
+              className="relative w-full aspect-[16/9] overflow-hidden rounded-xl sm:rounded-2xl bg-black cursor-ew-resize select-none touch-none"
               style={{ touchAction: "none" }}
             >
               {/* Bottom Layer: After Image (Algo Overlay) */}
