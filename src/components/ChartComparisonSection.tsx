@@ -63,13 +63,13 @@ export default function ChartComparisonSection() {
   }, [isDragging, updatePosition]);
 
   return (
-    <section id="preview" className="relative px-5 py-24 sm:px-8 bg-[#070709] border-t border-white/[0.08] overflow-hidden">
+    <section id="preview" className="relative px-3.5 py-24 sm:px-8 bg-[#070709] border-t border-white/[0.08] overflow-hidden">
       {/* Ambient background gold glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-[#C9A84C]/10 blur-[150px] pointer-events-none" />
 
       <div className="mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-center px-1.5 sm:px-0">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/35 bg-[#C9A84C]/10 px-4 py-1.5 text-xs font-black tracking-widest text-[#E8C97A] uppercase shadow-md shadow-[#C9A84C]/10">
             <span className="h-2 w-2 rounded-full bg-[#C9A84C] animate-pulse" />
             <span>Interactive Preview</span>
@@ -96,7 +96,7 @@ export default function ChartComparisonSection() {
 
         {/* Interactive Comparison Slider Container */}
         <div className="mt-14 mx-auto max-w-5xl">
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-black/90 p-1.5 sm:p-4 shadow-2xl shadow-black backdrop-blur-2xl -mx-3 sm:mx-0 w-[calc(100%+1.5rem)] sm:w-full">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-black/90 p-1.5 sm:p-4 shadow-2xl shadow-black backdrop-blur-2xl w-full mx-auto">
             {/* Terminal Header */}
             <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 border-b border-white/10 px-2 sm:px-3 pb-2.5 sm:pb-3 mb-2.5 sm:mb-3">
               <div className="flex items-center gap-2">

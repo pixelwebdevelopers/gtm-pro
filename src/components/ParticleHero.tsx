@@ -214,9 +214,9 @@ export default function ParticleHero() {
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[400px] rounded-full bg-[#C9A84C]/10 blur-[110px] pointer-events-none" />
 
       {/* 2-Column Split Grid */}
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:gap-14 px-5 sm:px-8 lg:grid-cols-[1.1fr_.9fr] w-full">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:gap-14 px-3.5 sm:px-8 lg:grid-cols-[1.1fr_.9fr] w-full">
         {/* Left Column: Heading, Subtitles, CTAs */}
-        <div>
+        <div className="px-1.5 sm:px-0">
           {/* Top Pill Badge */}
           <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#C9A84C]/40 bg-black/50 px-4 py-2 backdrop-blur-md shadow-lg">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.85)] animate-pulse" />
@@ -288,12 +288,12 @@ export default function ParticleHero() {
         </div>
 
         {/* Right Column: The Glowing Live Gold Chart */}
-        <div className="relative w-full -mx-3.5 sm:mx-0 w-[calc(100%+1.75rem)] sm:w-full">
+        <div className="relative w-full mx-auto">
           {/* Ambient Gold Aura behind chart */}
           <div className="absolute -inset-4 rounded-[2.5rem] bg-[#C9A84C]/25 blur-3xl pointer-events-none" />
 
           {/* Outer Glass Card */}
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-white/[0.07] p-1.5 sm:p-4 pt-2.5 sm:pt-4 shadow-2xl shadow-black/80 backdrop-blur-2xl">
+          <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-white/[0.07] p-1.5 sm:p-4 pt-2.5 sm:pt-4 shadow-2xl shadow-black/80 backdrop-blur-2xl w-full">
             {/* Terminal Bar Header */}
             <div className="flex items-center justify-between pb-2.5 sm:pb-3 mb-2.5 sm:mb-3 border-b border-white/10 px-2">
               <div className="flex items-center gap-2 sm:gap-2.5">

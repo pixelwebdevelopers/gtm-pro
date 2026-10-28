@@ -33,7 +33,7 @@ export default function HowItTradesSection() {
   ];
 
   return (
-    <section id="how-it-works" className="relative px-5 py-24 sm:px-8 bg-[#050505] overflow-hidden">
+    <section id="how-it-works" className="relative px-3.5 py-24 sm:px-8 bg-[#050505] overflow-hidden">
       {/* Anchor alias for backwards compatibility */}
       <div id="how-it-trades" className="absolute -top-24 pointer-events-none" />
 
@@ -42,7 +42,7 @@ export default function HowItTradesSection() {
 
       <div className="mx-auto max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-3xl text-center px-1.5 sm:px-0">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/35 bg-[#C9A84C]/10 px-4 py-1.5 text-xs font-black tracking-widest text-[#E8C97A] uppercase shadow-md shadow-[#C9A84C]/10">
             <span className="h-2 w-2 rounded-full bg-[#C9A84C] animate-pulse" />
             <span>How It Works</span>
@@ -95,7 +95,7 @@ export default function HowItTradesSection() {
             <div className="absolute -inset-4 sm:-inset-6 rounded-[2.5rem] bg-[#C9A84C]/20 blur-3xl pointer-events-none" />
 
             {/* Premium Glass Terminal Container */}
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-zinc-950/90 shadow-2xl shadow-black backdrop-blur-2xl -mx-3 sm:mx-0 w-[calc(100%+1.5rem)] sm:w-full">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-[2rem] border border-white/20 bg-zinc-950/90 shadow-2xl shadow-black backdrop-blur-2xl w-full mx-auto">
               {/* Terminal Title Bar */}
               <div className="flex items-center justify-between border-b border-white/10 px-3 sm:px-5 py-2.5 sm:py-3.5 bg-black/60">
                 <div className="flex items-center gap-2">
