@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import AnnouncementBar from "./AnnouncementBar";
 
 interface NavLinkItem {
   label: string;
@@ -12,6 +15,7 @@ interface NavLinkItem {
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   // Close mobile sidebar on Escape key or window resize to desktop
   useEffect(() => {
@@ -44,7 +48,7 @@ export default function Navbar() {
   const navLinks: NavLinkItem[] = [
     {
       label: "Features",
-      href: "#features",
+      href: "/#features",
       caption: "Core automation & execution safeguards",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -54,7 +58,7 @@ export default function Navbar() {
     },
     {
       label: "How It Works",
-      href: "#how-it-works",
+      href: "/#how-it-works",
       caption: "Repeating straddle cycle & grid logic",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -65,7 +69,7 @@ export default function Navbar() {
     },
     {
       label: "Preview",
-      href: "#preview",
+      href: "/#preview",
       caption: "Interactive before & after chart slider",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -77,7 +81,7 @@ export default function Navbar() {
     },
     {
       label: "Live Results",
-      href: "#live-results",
+      href: "/#live-results",
       caption: "Community proof & Telegram updates",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -87,8 +91,8 @@ export default function Navbar() {
     },
     {
       label: "Pricing",
-      href: "#pricing",
-      caption: "10-Account, Unlimited & Source plans",
+      href: "/#pricing",
+      caption: "5-Account, Unlimited & Source plans",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
@@ -98,7 +102,7 @@ export default function Navbar() {
     },
     {
       label: "Free Access",
-      href: "#how-to-get-free",
+      href: "/free-access",
       caption: "Partner broker onboarding & transfer",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -112,8 +116,8 @@ export default function Navbar() {
     },
     {
       label: "Downloads",
-      href: "#download",
-      caption: "MT4, MT5, Yin & Yang compiled binaries",
+      href: "/#download",
+      caption: "MT4, MT5, GTM Bull & Bear binaries",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -124,7 +128,7 @@ export default function Navbar() {
     },
     {
       label: "FAQ",
-      href: "#faq",
+      href: "/#faq",
       caption: "Frequently asked questions & guidance",
       icon: ({ className }) => (
         <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -137,62 +141,61 @@ export default function Navbar() {
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (!href.startsWith("#")) return;
-
-    e.preventDefault();
     setMobileMenuOpen(false);
 
-    if (href === "#" || href === "#top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      window.history.pushState(null, "", window.location.pathname);
-      return;
-    }
-
-    const targetId = href.replace(/^#/, "");
-    let elem = document.getElementById(targetId);
-
-    // Fallbacks & Aliases
-    if (!elem) {
-      if (targetId === "how-it-works" || targetId === "how-it-trades") {
-        elem = document.getElementById("how-it-works") || document.getElementById("how-it-trades");
-      } else if (targetId === "download" || targetId === "downloads") {
-        elem = document.getElementById("download") || document.getElementById("downloads");
-      } else if (targetId === "live-results" || targetId === "performance") {
-        elem = document.getElementById("live-results") || document.getElementById("performance");
-      } else if (targetId === "how-to-get-free" || targetId === "free") {
-        elem = document.getElementById("how-to-get-free") || document.getElementById("free");
+    if (href.startsWith("/#") && pathname === "/") {
+      e.preventDefault();
+      const targetId = href.replace(/^\/#/, "");
+      if (targetId === "" || targetId === "top") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.history.pushState(null, "", "/");
+        return;
       }
-    }
+      let elem = document.getElementById(targetId);
+      if (!elem) {
+        if (targetId === "how-it-works" || targetId === "how-it-trades") {
+          elem = document.getElementById("how-it-works") || document.getElementById("how-it-trades");
+        } else if (targetId === "download" || targetId === "downloads") {
+          elem = document.getElementById("download") || document.getElementById("downloads");
+        } else if (targetId === "live-results" || targetId === "performance") {
+          elem = document.getElementById("live-results") || document.getElementById("performance");
+        } else if (targetId === "how-to-get-free" || targetId === "free") {
+          elem = document.getElementById("how-to-get-free") || document.getElementById("free");
+        }
+      }
 
-    if (elem) {
-      const headerOffset = 76;
-      const elementPosition = elem.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      if (elem) {
+        const headerOffset = 90;
+        const elementPosition = elem.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: "smooth",
-      });
-      window.history.pushState(null, "", href);
-    } else {
-      window.location.hash = href;
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: "smooth",
+        });
+        window.history.pushState(null, "", href.replace("/", ""));
+      } else {
+        window.location.hash = targetId;
+      }
     }
   };
 
   return (
     <>
+      <AnnouncementBar />
+
       <header className="sticky top-0 z-40 border-b border-white/[0.08] bg-[#070709]/95 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 sm:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
           {/* Brand Logo */}
-          <a
-            href="#"
-            onClick={(e) => handleNavClick(e, "#")}
+          <Link
+            href="/"
+            onClick={(e) => handleNavClick(e, "/#top")}
             className="flex items-center gap-3 shrink-0 cursor-pointer"
-            title="GTM PRO - Scroll to top"
+            title="GTM PRO - Home"
           >
             <div
               style={{ position: "relative" }}
-              className="relative h-10 sm:h-11 w-32 sm:w-36 transition-transform hover:scale-[1.02]"
+              className="relative h-9 sm:h-10 w-32 sm:w-36 transition-transform hover:scale-[1.02]"
             >
               <Image
                 src="/logo.png"
@@ -203,10 +206,10 @@ export default function Navbar() {
                 priority
               />
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-semibold text-zinc-400">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-6 text-sm font-semibold text-zinc-400">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -228,11 +231,11 @@ export default function Navbar() {
             </div>
 
             <a
-              href="https://t.me/abangrimba"
+              href="https://t.me/Ryan_Mitchell_GTMPRO"
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10 text-zinc-300 hover:text-white hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/10 transition-all cursor-pointer"
-              title="Join Telegram Channel"
+              title="Telegram Admin"
             >
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M21.5 2L2 9.5l7 3.5 3.5 7L21.5 2z"></path>
@@ -241,8 +244,8 @@ export default function Navbar() {
             </a>
 
             <a
-              href="#pricing"
-              onClick={(e) => handleNavClick(e, "#pricing")}
+              href="/#pricing"
+              onClick={(e) => handleNavClick(e, "/#pricing")}
               className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-lg shadow-[#C9A84C]/20 transition-all hover:brightness-110 active:scale-[0.98] cursor-pointer"
             >
               Get GTM PRO
@@ -294,9 +297,9 @@ export default function Navbar() {
 
           {/* Top Header of Sidebar */}
           <div className="relative z-10 flex items-center justify-between border-b border-white/[0.08] px-6 py-4.5 bg-black/40 backdrop-blur-sm">
-            <a
-              href="#"
-              onClick={(e) => handleNavClick(e, "#")}
+            <Link
+              href="/"
+              onClick={(e) => handleNavClick(e, "/#top")}
               className="flex items-center gap-2 cursor-pointer"
             >
               <div className="relative h-9 w-28">
@@ -308,7 +311,7 @@ export default function Navbar() {
                   className="object-contain object-left"
                 />
               </div>
-            </a>
+            </Link>
 
             {/* Circular Close Button */}
             <button
@@ -335,12 +338,12 @@ export default function Navbar() {
                 <span>Server Licensing Online</span>
               </div>
               <span className="rounded bg-[#C9A84C]/15 px-2 py-0.5 text-[10px] font-black tracking-wider text-[#E8C97A] border border-[#C9A84C]/30">
-                v4.2.7
+                v1.0
               </span>
             </div>
           </div>
 
-          {/* Middle Navigation Section (Scrollable if screen height is small) */}
+          {/* Middle Navigation Section */}
           <div className="relative z-10 flex-1 overflow-y-auto px-4 py-2 space-y-1">
             <p className="px-3 pt-2 pb-1 text-[10px] font-black tracking-widest text-[#E8C97A] uppercase">
               Navigation
@@ -390,11 +393,11 @@ export default function Navbar() {
           {/* Bottom Action Section with CTAs */}
           <div className="relative z-10 border-t border-white/[0.08] bg-black/60 p-5 backdrop-blur-md space-y-3">
             <a
-              href="#pricing"
-              onClick={(e) => handleNavClick(e, "#pricing")}
+              href="/#pricing"
+              onClick={(e) => handleNavClick(e, "/#pricing")}
               className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] via-[#E8C97A] to-[#C9A84C] py-3.5 text-center text-xs font-black tracking-wide text-zinc-950 shadow-lg shadow-[#C9A84C]/25 transition-all hover:brightness-110 active:scale-[0.98] cursor-pointer"
             >
-              <span>Get GTM PRO v4.2.7</span>
+              <span>Get GTM PRO v1.0</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -402,7 +405,7 @@ export default function Navbar() {
             </a>
 
             <a
-              href="https://t.me/abangrimba"
+              href="https://t.me/Ryan_Mitchell_GTMPRO"
               target="_blank"
               rel="noopener noreferrer"
               className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.05] py-3 text-center text-xs font-bold text-white transition-all hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/10 cursor-pointer"
@@ -411,7 +414,7 @@ export default function Navbar() {
                 <path d="M21.5 2L2 9.5l7 3.5 3.5 7L21.5 2z"></path>
                 <path d="M9 13l5.5-5.5"></path>
               </svg>
-              <span>Join Telegram Community</span>
+              <span>Telegram: @Ryan_Mitchell_GTMPRO</span>
             </a>
 
             <div className="pt-1 flex items-center justify-between text-[10px] text-zinc-400 font-mono">

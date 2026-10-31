@@ -7,28 +7,28 @@ export default function HowItTradesSection() {
   const fiveSteps = [
     {
       num: "01",
-      title: "Watches Gold Structure",
-      desc: "Continuously tracks XAUUSD equilibrium and market volatility across session opens, scanning for valid liquidity conditions 24/5.",
+      title: "Sets the Trap",
+      desc: "At the start of every cycle, GTM PRO places a Buy Stop above and a Sell Stop below the current gold price. No guessing which way the market will go.",
     },
     {
       num: "02",
-      title: "Waits for Valid Setup",
-      desc: "Eliminates premature entries. Waits patiently for the exact mathematical breakout criteria it was built to identify.",
+      title: "Market Picks the Direction",
+      desc: "Whichever order the price hits first becomes the active trade. The opposite order is cancelled instantly.",
     },
     {
       num: "03",
-      title: "Gets In Without Hesitation",
-      desc: "Executes instantaneously the moment price crosses threshold parameters, instantly cancelling opposing pending orders.",
+      title: "Manages the Pullback",
+      desc: "If price moves against the trade, GTM PRO adds measured layers at fixed spacing and controlled lot steps, always by rules, never by emotion.",
     },
     {
       num: "04",
-      title: "Manages The Exit",
-      desc: "Applies dynamic basket recovery, rollover spread pause guards, and trailing profit locks to protect account equity.",
+      title: "Closes at One Target",
+      desc: "All positions share one basket take profit. When price reaches it, every position closes together in profit.",
     },
     {
       num: "05",
-      title: "Closes & Auto-Resets",
-      desc: "Locks in net target profit, flattens exposure, and resets buffer variables to prepare for the next setup — every single time.",
+      title: "Guards & Resets",
+      desc: "News filter, session pause and your optional loss limit stay on guard. Once the basket closes, a fresh cycle begins automatically.",
     },
   ];
 
@@ -45,19 +45,15 @@ export default function HowItTradesSection() {
         <div className="mx-auto max-w-3xl text-center px-1.5 sm:px-0">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/35 bg-[#C9A84C]/10 px-4 py-1.5 text-xs font-black tracking-widest text-[#E8C97A] uppercase shadow-md shadow-[#C9A84C]/10">
             <span className="h-2 w-2 rounded-full bg-[#C9A84C] animate-pulse" />
-            <span>How It Works</span>
+            <span>HOW IT WORKS</span>
           </div>
 
           <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
-            The <span className="gold-text">GTM PRO Edge™</span>
+            The <span className="gold-text">GTM PRO Cycle</span>
           </h2>
 
           <p className="mt-6 text-base sm:text-lg lg:text-xl leading-relaxed text-zinc-300 font-normal">
-            The problem was never your strategy. It was the moment between seeing the setup and
-            acting on it. Both GTM PRO and GTM PRO White-Label use the same GTM Edge, the
-            five-step system that removes that moment completely. It watches Gold, waits for the
-            conditions it was built to find, gets in, manages the exit, and closes, every single
-            time. You set the risk per trade. The system follows it without hesitation.
+            Most traders don&apos;t lose because of a bad strategy. They lose in the moment between seeing a move and reacting to it — hesitation, fear, greed. GTM PRO removes that moment completely. It follows the same five-step cycle on every trade: no prediction, no emotion, no second-guessing. You choose the settings. The system follows them, every single time.
           </p>
         </div>
 
@@ -73,25 +69,28 @@ export default function HowItTradesSection() {
                   {st.num}
                 </span>
                 <h3 className="mt-4 text-base font-bold text-white group-hover:text-[#E8C97A] transition-colors">
-                  {st.title}
+                  {st.num} · {st.title}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-zinc-400 font-medium">
                   {st.desc}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-white/[0.06] flex items-center gap-1.5 text-[11px] font-semibold text-[#E8C97A]">
+              <a
+                href="#features"
+                className="mt-5 pt-3 border-t border-white/[0.06] flex items-center gap-1.5 text-[11px] font-semibold text-[#E8C97A] hover:text-white transition-colors cursor-pointer"
+              >
                 <span>Automated step</span>
                 <span>→</span>
-              </div>
+              </a>
             </div>
           ))}
         </div>
 
-        {/* The .GIF Showcase Display */}
+        {/* The Demo Video / GIF Display */}
         <div className="mt-16 sm:mt-20">
           <div className="relative mx-auto max-w-3xl">
-            {/* Ambient Gold Aura behind GIF container */}
+            {/* Ambient Gold Aura behind container */}
             <div className="absolute -inset-4 sm:-inset-6 rounded-[2.5rem] bg-[#C9A84C]/20 blur-3xl pointer-events-none" />
 
             {/* Premium Glass Terminal Container */}
@@ -102,25 +101,25 @@ export default function HowItTradesSection() {
                   <span className="h-3 w-3 rounded-full bg-red-500/80 inline-block" />
                   <span className="h-3 w-3 rounded-full bg-amber-500/80 inline-block" />
                   <span className="h-3 w-3 rounded-full bg-emerald-500/80 inline-block" />
-                  <span className="ml-2 sm:ml-3 text-[11px] sm:text-xs font-mono font-semibold text-zinc-300 sm:text-zinc-400 truncate max-w-[170px] sm:max-w-none">
-                    XAUUSD · GTM PRO Edge™
+                  <span className="ml-2 sm:ml-3 text-[11px] sm:text-xs font-mono font-semibold text-zinc-300 sm:text-zinc-400 truncate max-w-[190px] sm:max-w-none">
+                    XAUUSD · GTM PRO Cycle
                   </span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-emerald-400">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Live Execution Demo</span>
+                    <span>REAL MT5 EXECUTION</span>
                   </span>
                 </div>
               </div>
 
-              {/* Animated GIF Body - Responsive: Full on mobile, comfortably sized on desktop */}
+              {/* Animated GIF Body */}
               <div className="p-1 sm:p-5 flex items-center justify-center bg-black/80">
                 <div className="relative w-full max-w-full sm:max-w-[460px] md:max-w-[480px] lg:max-w-[500px] overflow-hidden rounded-lg sm:rounded-xl border border-white/[0.08] shadow-inner bg-black">
                   <NextImage
                     src="/chart.gif"
-                    alt="GTM PRO Live Chart Animation"
+                    alt="GTM PRO Live MT5 Execution Recording"
                     width={1000}
                     height={1000}
                     unoptimized
@@ -130,31 +129,31 @@ export default function HowItTradesSection() {
                 </div>
               </div>
 
-              {/* Bottom Feature Strip */}
+              {/* Bottom Feature Strip (4 items) */}
               <div className="border-t border-white/10 bg-black/70 px-5 py-4">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                   <div>
                     <span className="block text-xs font-bold text-white">Zero Hesitation</span>
-                    <span className="text-[10px] text-zinc-500">Autonomous triggers</span>
+                    <span className="text-[10px] text-zinc-400">Executes instantly by fixed rules</span>
                   </div>
                   <div>
-                    <span className="block text-xs font-bold text-[#E8C97A]">Disciplined Risk</span>
-                    <span className="text-[10px] text-zinc-500">Fixed risk per trade</span>
+                    <span className="block text-xs font-bold text-[#E8C97A]">Controlled Layers</span>
+                    <span className="text-[10px] text-zinc-400">Fixed spacing &amp; lot steps</span>
                   </div>
                   <div>
-                    <span className="block text-xs font-bold text-white">Dynamic Exit</span>
-                    <span className="text-[10px] text-zinc-500">Basket TP & recovery</span>
+                    <span className="block text-xs font-bold text-white">One Basket TP</span>
+                    <span className="text-[10px] text-zinc-400">All positions close together</span>
                   </div>
                   <div>
-                    <span className="block text-xs font-bold text-[#E8C97A]">MT4 & MT5</span>
-                    <span className="text-[10px] text-zinc-500">Full platform support</span>
+                    <span className="block text-xs font-bold text-[#E8C97A]">MT4 &amp; MT5</span>
+                    <span className="text-[10px] text-zinc-400">Full platform support</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <p className="mt-4 text-center text-xs text-zinc-400">
-              Live chart demonstration illustrating autonomous entry timing, order management, and structured exit sequence on XAUUSD.
+              Real MT5 recording of GTM PRO trading XAUUSD: entry, layer management and basket take-profit exit.
             </p>
           </div>
         </div>

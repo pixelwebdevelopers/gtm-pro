@@ -24,6 +24,21 @@ export default function ParticleHero() {
     setActiveInterval(val);
   };
 
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const elem = document.getElementById(id);
+    if (elem) {
+      const headerOffset = 90;
+      const elementPosition = elem.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: "smooth",
+      });
+      window.history.pushState(null, "", `#${id}`);
+    }
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -218,70 +233,64 @@ export default function ParticleHero() {
         {/* Left Column: Heading, Subtitles, CTAs */}
         <div className="px-1.5 sm:px-0">
           {/* Top Pill Badge */}
-          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#C9A84C]/40 bg-black/50 px-4 py-2 backdrop-blur-md shadow-lg">
+          <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-[#C9A84C]/40 bg-black/60 px-4 py-2 backdrop-blur-md shadow-lg">
             <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.85)] animate-pulse" />
-            <span className="text-[11px] font-black tracking-[0.18em] text-[#E8C97A] uppercase sm:text-xs">
-              Automated MT4/MT5 Trading · v4.2.7
+            <span className="text-[11px] font-black tracking-[0.16em] text-[#E8C97A] uppercase sm:text-xs">
+              AUTOMATED GOLD TRADING · MT4 & MT5
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.0] text-white">
-            Trade <span className="gold-text">XAUUSD</span> <br />with Structure
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[1.04] text-white">
+            Trade Gold with <br className="hidden sm:inline" />
+            <span className="gold-text">Structure, Not Stress</span>
           </h1>
 
           {/* Tagline */}
           <p className="mt-5 text-lg sm:text-xl font-bold tracking-tight text-[#E8C97A]">
-            Optimized for Gold Trading. Built for MT4 & MT5.
+            Gold Trading on Autopilot. Driven by Rules, Not Emotions.
           </p>
 
-          {/* Subtitle */}
+          {/* Subtitle / Description */}
           <p className="mt-3.5 max-w-xl text-base sm:text-lg leading-relaxed text-zinc-300">
-            GTM PRO (<strong className="text-white">GoldTacticalMachine.com</strong>) automates trade
-            execution and basket management using a structured trading approach designed for
-            traders who prefer consistency over manual execution.
+            GTM PRO is a fully automated Expert Advisor for XAUUSD on MetaTrader. It enters, manages and closes every trade by fixed rules, so you can stop staring at charts and let a disciplined system work for you, 24/5.
           </p>
 
           {/* CTAs */}
           <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
             <a
               href="#pricing"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-7 py-4 text-sm font-black text-zinc-950 shadow-2xl shadow-[#C9A84C]/25 transition-transform hover:brightness-110 active:scale-[0.98]"
+              onClick={(e) => handleScrollTo(e, "pricing")}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-7 py-4 text-sm font-black text-zinc-950 shadow-2xl shadow-[#C9A84C]/25 transition-transform hover:brightness-110 active:scale-[0.98] cursor-pointer"
             >
-              <span>Get GTM PRO v4.2.7</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
+              <span>Get GTM PRO →</span>
             </a>
 
             <a
               href="#how-it-works"
+              onClick={(e) => handleScrollTo(e, "how-it-works")}
               className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-7 py-4 text-sm font-black text-white transition-colors hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/10 cursor-pointer"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <polygon points="5 3 19 12 5 21 5 3"></polygon>
-              </svg>
-              <span>How It Works</span>
+              <span>See How It Works</span>
             </a>
           </div>
 
-          {/* Key Quick Benefits */}
+          {/* Trust points (4 chips) */}
           <div className="mt-8 flex flex-wrap items-center gap-2.5">
             {[
-              "100% Automated Straddle",
+              "100% Automated Trading",
               "Cent & Standard Accounts",
-              "Rollover Pause Window",
-              "Server License Binding",
-            ].map((feat) => (
+              "News & Rollover Pause",
+              "Free Backtest & Demo",
+            ].map((chip) => (
               <div
-                key={feat}
+                key={chip}
                 className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-3.5 py-2 text-xs font-semibold text-zinc-300"
               >
                 <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
                   ✓
                 </span>
-                <span>{feat}</span>
+                <span>{chip}</span>
               </div>
             ))}
           </div>
@@ -302,10 +311,10 @@ export default function ParticleHero() {
                 </span>
                 <div className="flex items-center gap-1.5 sm:gap-2">
                   <span className="text-xs sm:text-sm font-bold text-white tracking-wide">
-                    XAU/USD
+                    OANDA:XAUUSD
                   </span>
                   <span className="hidden sm:inline text-xs sm:text-sm font-medium text-zinc-400">
-                    · Gold Spot
+                    Gold Spot 
                   </span>
                   <span className="rounded bg-emerald-500/20 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-black text-emerald-400 border border-emerald-500/40 uppercase">
                     LIVE
@@ -347,7 +356,7 @@ export default function ParticleHero() {
               )}
               <iframe
                 key={activeInterval}
-                title="Live XAUUSD Gold Chart"
+                title="Live OANDA:XAUUSD Gold Chart"
                 src={chartUrl}
                 className="h-[390px] sm:h-[430px] md:h-[460px] w-full border-0"
                 loading="eager"
@@ -357,8 +366,7 @@ export default function ParticleHero() {
           </div>
 
           <p className="mt-3 px-2 text-center sm:text-left text-xs leading-relaxed text-zinc-400">
-            Live chart is for real-time market reference. GTM PRO executes autonomously inside your
-            own MetaTrader desktop terminal or VPS.
+            Live chart for real-time market reference only. GTM PRO executes autonomously inside your own MetaTrader terminal, on your PC or VPS.
           </p>
         </div>
       </div>

@@ -80,7 +80,7 @@ export default function ProfitCalculator() {
                       </span>
                     </div>
                     <span className="text-xs text-[var(--text-muted)] block">
-                      Vantage / VT Markets Cent
+                      Vantage Markets / Exness Cent
                     </span>
                   </button>
 

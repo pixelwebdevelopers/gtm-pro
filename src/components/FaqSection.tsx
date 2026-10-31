@@ -1,186 +1,190 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface FaqItem {
   id: string;
-  catKey: string;
+  catKey: "basics" | "account" | "risk" | "setup";
   q: string;
   a: string;
 }
 
 export default function FaqSection() {
-  const [activeCat, setActiveCat] = useState("1");
+  const [activeCat, setActiveCat] = useState<"basics" | "account" | "risk" | "setup">("basics");
   const [openId, setOpenId] = useState<string | null>("q1");
 
   const categories = [
-    { key: "1", label: "Basics" },
-    { key: "2", label: "Account & Broker" },
-    { key: "3", label: "Capital & Risk" },
-    { key: "4", label: "Setup & Help" },
+    { key: "basics" as const, label: "Basics (6)" },
+    { key: "account" as const, label: "Account & Broker (5)" },
+    { key: "risk" as const, label: "Capital & Risk (6)" },
+    { key: "setup" as const, label: "Setup & Help (3)" },
   ];
 
   const faqs: FaqItem[] = [
-    // Cat 1: Basics
+    // TAB 1 — BASICS (6)
     {
       id: "q1",
-      catKey: "1",
+      catKey: "basics",
       q: "What is GTM PRO?",
-      a: "GTM PRO is an Expert Advisor for MetaTrader 4 and MetaTrader 5, built specifically for XAUUSD (Gold) trading. It uses a straddle-entry strategy, grid recovery, basket take profit, license binding, and strict risk control to manage trades automatically according to your configured settings.",
+      a: "GTM PRO is an Expert Advisor for MetaTrader 4 and MetaTrader 5, built specifically for trading XAUUSD (Gold). It uses a straddle entry, grid recovery, a shared basket take profit, license binding and strict risk controls to manage your trades automatically, based on the settings you choose.",
     },
     {
       id: "q2",
-      catKey: "1",
+      catKey: "basics",
       q: "Who is GTM PRO for?",
-      a: "GTM PRO suits traders who understand the risks of automated trading and are ready to follow the correct standard setup (broker choice, account type, leverage, lot size, VPS use, and risk settings). It is not for users who expect fixed profit without being willing to face floating loss or drawdown.",
+      a: "GTM PRO is for traders who understand the risks of automated trading and are ready to follow the correct setup: the right broker, account type, leverage, lot size, VPS and risk settings. It is not for anyone expecting a fixed profit without being ready to handle floating loss or drawdown.",
     },
     {
       id: "q3",
-      catKey: "1",
+      catKey: "basics",
       q: "Can GTM PRO be used on MT4 and MT5?",
-      a: "Yes. The current official release provides builds for both platforms — a .ex4 file for MetaTrader 4 and a .ex5 file for MetaTrader 5. Just pick the file that matches the MetaTrader platform you use.",
+      a: "Yes. GTM PRO comes as a .ex5 file for MetaTrader 5 and a .ex4 file for MetaTrader 4 (the MT4 version is coming soon). Simply download the file that matches the platform you use.",
     },
     {
       id: "q4",
-      catKey: "1",
+      catKey: "basics",
       q: "Can I run GTM PRO on a mobile phone?",
-      a: "No. A phone is only for monitoring trade activity through the mobile MetaTrader app. The EA file must run inside a desktop MT4 or MT5 terminal installed on a Windows PC/laptop or a VPS.",
+      a: "No. The EA must run inside the desktop MT4 or MT5 terminal, on a Windows PC, laptop or VPS. Your phone can only be used to monitor your trades through the MetaTrader mobile app.",
     },
     {
       id: "q5",
-      catKey: "1",
-      q: "Do I need a VPS?",
-      a: "A Virtual Private Server (VPS) is strongly recommended for live trading. The EA needs the MetaTrader terminal online 24/5 to open, manage, and close positions. If your PC or laptop is turned off, in sleep mode, restarting, or loses internet, the EA cannot work to manage your trades.",
+      catKey: "basics",
+      q: "Which pair does GTM PRO trade?",
+      a: "GTM PRO is designed and optimized for XAUUSD (Gold). If you want to use it on other pairs, you must use a special configuration or .set file tested for that pair. Never copy the XAUUSD settings to another pair without checking them first.",
     },
-
-    // Cat 2: Account & Broker
     {
       id: "q6",
-      catKey: "2",
-      q: "Which brokers can I use?",
-      a: "GTM PRO can work on any MT4/MT5 broker that provides a suitable symbol, spread, leverage, execution quality, and account type. For the Free Access program, the trading account must first be registered under our supported IB (Introducing Broker) network and verified.",
+      catKey: "basics",
+      q: "What strategy does GTM PRO use?",
+      a: "GTM PRO places a straddle of pending orders (a Buy Stop and a Sell Stop) around the current price. Once one side is triggered, it manages that trade chain as a basket, using grid spacing, lot scaling (martingale) and a basket take profit, until the whole basket closes in net profit according to your settings.",
     },
+
+    // TAB 2 — ACCOUNT & BROKER (5)
     {
       id: "q7",
-      catKey: "2",
-      q: "I already have a broker account. Can I use it?",
-      a: "Please check with support first. For a Direct License subscription, an existing broker account may be considered if its specifications meet the EA's technical requirements. For the Free Access program, the account must be under our IB network; otherwise you will need to do an IB transfer or open a new account.",
+      catKey: "account",
+      q: "Which brokers can I use?",
+      a: "GTM PRO works with any MT4/MT5 broker that offers a suitable Gold symbol, spread, leverage, execution quality and account type. For Free Access, your trading account must first be registered and verified under our partner link with Vantage Markets or Exness.",
     },
     {
       id: "q8",
-      catKey: "2",
-      q: "What is the difference between Direct License and Free Access?",
-      a: "Direct License gives users full flexibility to use any broker of their own choice without volume conditions. Free Access is a program with no monthly license fee, but license activation depends entirely on verifying the account status under the IB broker network we support.",
+      catKey: "account",
+      q: "I already have a broker account. Can I use it?",
+      a: "Please check with our support first. With a Direct License, your existing account can be used if it meets the EA's requirements. For Free Access, your account must be under our partner network, so you will need to transfer your IB/partner to us or open a new account.",
     },
     {
       id: "q9",
-      catKey: "2",
-      q: "Can I use a cent account?",
-      a: "Yes, a cent account is highly recommended when the broker, leverage type, spread, symbol suffix, and set file used all match. Cent accounts are typically used for live testing sessions with smaller real capital, but risk-management principles still apply.",
+      catKey: "account",
+      q: "What is the difference between Direct License and Free Access?",
+      a: "A Direct License gives you full freedom to use any broker, with no trading-volume conditions. Free Access has no license fee, but it is only activated after we verify that your account is under our partner network with Vantage Markets or Exness.",
     },
     {
       id: "q10",
-      catKey: "2",
-      q: "Can I use a standard account?",
-      a: "Yes, a standard account can be used. However, it requires far larger capital, minimum lot sizes, and more conservative risk settings. Floating loss on a standard account is far larger than on a cent account if lot settings are too aggressive.",
+      catKey: "account",
+      q: "Can I use a cent account?",
+      a: "Yes, and it is highly recommended, as long as your broker, leverage, spread, symbol name and .set file all match. Cent accounts let you trade live with smaller real capital, but the same risk-management rules still apply.",
     },
-
-    // Cat 3: Capital & Risk
     {
       id: "q11",
-      catKey: "3",
-      q: "How much capital do you recommend?",
-      a: "While GTM PRO can technically run on a cent account with as low as 10,000 USC, most of our users opt for 50,000 USC or higher for a more balanced and comfortable trading experience. In our recent live forward-testing, a capital size of 100,000 USC has delivered the strongest margin flexibility and stability during changing, unpredictable market conditions. Choose a capital size that fits your financial goals and risk comfort zone.",
+      catKey: "account",
+      q: "Can I use a standard account?",
+      a: "Yes. But a standard account needs much more capital, the minimum lot size and more conservative risk settings. If your lot settings are too aggressive, floating loss on a standard account is far larger than on a cent account.",
     },
+
+    // TAB 3 — CAPITAL & RISK (6)
     {
       id: "q12",
-      catKey: "3",
-      q: "What lot size is suitable?",
-      a: "Lot size must be calculated and decided based on total capital, equity, leverage, account type, spread, and the loaded preset. Never choose lot size based on a profit target alone; lot size must be based on the account's ability to withstand the impact of floating movement and market drawdown. The default start is 0.01.",
+      catKey: "risk",
+      q: "How much capital do you recommend?",
+      a: "GTM PRO can technically run on a cent account with as little as 10,000 USC, but most users choose 50,000 USC or more for a more balanced and comfortable experience. In our recent live forward-testing, 100,000 USC gave the best margin flexibility and stability in changing market conditions. In general, the stronger your capital, the better your account can handle market swings. Choose a capital size that fits your goals and your comfort with risk.",
     },
     {
       id: "q13",
-      catKey: "3",
-      q: "Which pair does GTM PRO trade?",
-      a: "GTM PRO's main focus and logic optimization is specifically for the XAUUSD (Gold) market. If you intend to use it on other currency pairs, you must use a special configuration or set file that has been tested for that pair. Never copy the XAUUSD settings directly to another pair without a technical review.",
+      catKey: "risk",
+      q: "What lot size is suitable?",
+      a: "Your lot size should be based on your total capital, equity, leverage, account type, spread and the preset you use. Never choose a lot size based only on a profit target. It must match how much floating movement and drawdown your account can handle. The default starting lot is 0.01.",
     },
     {
       id: "q14",
-      catKey: "3",
-      q: "What strategy does GTM PRO use?",
-      a: "GTM PRO uses a straddle pending-order system (BuyStop & SellStop) around the current market price. Once one direction is triggered, the EA begins managing that transaction chain (basket) using grid distance, lot scaling (martingale), and basket take profit until the entire position is closed net according to the target settings.",
+      catKey: "risk",
+      q: "Does GTM PRO guarantee profit?",
+      a: "No. No trading system or EA can guarantee fixed profit or a risk-free investment. GTM PRO can still face floating loss, drawdown, margin call, stop out and even the loss of your full capital, especially when the market moves strongly in one direction without enough pullback.",
     },
     {
       id: "q15",
-      catKey: "3",
-      q: "Does GTM PRO guarantee profit?",
-      a: "No. No trading system or EA can guarantee fixed profit or risk-free investment. GTM PRO remains exposed to floating loss, drawdown, margin call, stop out, and full capital loss, especially when the market moves sharply in one direction without enough price retracement.",
+      catKey: "risk",
+      q: "What is the main risk of GTM PRO?",
+      a: "The main risk is rising floating drawdown while grid recovery is active. If the market keeps moving against the open basket, margin use grows quickly. That is why your capital, lot size, leverage, preset, VPS stability and risk-limit settings must be chosen correctly from the start.",
     },
     {
       id: "q16",
-      catKey: "3",
-      q: "What is the main risk of GTM PRO?",
-      a: "The main risk is rising floating drawdown while the grid recovery phase is actively running. If the market keeps driving against the active basket's direction, margin exposure rises sharply. That is why compliance with the capital ratio, lot, leverage, VPS stability, and risk-limit settings must be chosen correctly from the start.",
+      catKey: "risk",
+      q: "Can I trade during news?",
+      a: "GTM PRO has a built-in news filter that automatically pauses new cycles before and after high-impact news, while open baskets are still managed to take profit. Even so, major events like NFP, CPI and FOMC can cause wider spreads, slippage and very fast moves, so always keep your risk under control around them.",
     },
     {
       id: "q17",
-      catKey: "3",
-      q: "Can I trade during news?",
-      a: "High-impact news such as NFP, CPI, FOMC, and other major Gold events can cause widening spreads, slippage, and extremely fast market moves in a short period. Users are strongly advised to reduce account risk by closing pending orders or stopping new entry cycles manually before major news is released, to avoid overly volatile market shocks.",
-    },
-    {
-      id: "q18",
-      catKey: "3",
+      catKey: "risk",
       q: "Can I withdraw profit anytime?",
-      a: "Withdrawals are handled entirely through your broker's system, not through EA functions. However, you must ensure free margin remains sufficient after the withdrawal is done. Avoid making very large withdrawals while the account has active floating baskets, as it can spike the risk of a sudden margin call or stop out.",
+      a: "Yes. Withdrawals are made through your broker, not through the EA. Just make sure you keep enough free margin after withdrawing. Avoid large withdrawals while a basket is still open and floating, as this can increase the risk of a sudden margin call or stop out.",
     },
 
-    // Cat 4: Setup & Help
+    // TAB 4 — SETUP & HELP (3)
+    {
+      id: "q18",
+      catKey: "setup",
+      q: "Do I need a VPS?",
+      a: "A VPS is strongly recommended for live trading. The EA needs MetaTrader to stay online 24/5 to open, manage and close positions. If your PC or laptop is turned off, goes to sleep, restarts or loses internet, the EA cannot manage your trades.",
+    },
     {
       id: "q19",
-      catKey: "4",
+      catKey: "setup",
       q: "Why isn't the EA opening trades?",
-      a: "Common causes include an invalid/expired license status, the WebRequest URL domain not yet allowed in settings, the Algo/AutoTrading button turned off on the terminal, a closed market session, current spread exceeding the maximum limit, a wrong symbol suffix on the broker, the trading window not yet started, insufficient free margin, or a set file that does not match the account specifications.",
+      a: "Common reasons are: an invalid or expired license, the WebRequest URL not added in MetaTrader settings, the Algo Trading button switched off, the market being closed, the spread being above the allowed limit, a wrong symbol name (suffix), the trading window not having started yet, not enough free margin, or a .set file that doesn't match your account.",
     },
     {
       id: "q20",
-      catKey: "4",
+      catKey: "setup",
       q: "If I register to get the EA, is an installation service provided?",
-      a: "An installation service is not provided by default. Users must install it themselves. Support is ready to help check basic information or review error logs in the Experts/Journal tab if you face technical problems, but users must never share their trading account password (master password) with anyone.",
+      a: "Installation is not included by default, so you will need to install the EA yourself using our guide. If you face a technical problem, our support team can help you check the basics or review the errors in your Experts/Journal tab. Never share your trading account's master password with anyone.",
     },
   ];
 
-  const filteredFaqs = faqs.filter((f) => f.catKey === activeCat);
+  const filteredFaqs = faqs.filter((item) => item.catKey === activeCat);
 
   return (
-    <section id="faq" className="border-y border-white/10 bg-zinc-950 px-5 py-20 sm:px-8">
+    <section id="faq" className="border-t border-white/10 bg-zinc-950 px-4 py-20 sm:px-8">
       <div className="mx-auto max-w-4xl">
-        <p className="text-center text-sm font-black tracking-wider text-[#E8C97A] uppercase">
-          FAQ
-        </p>
-        <h2 className="mt-3 text-center text-4xl font-black tracking-tight text-white sm:text-5xl">
-          Frequently Asked Questions
-        </h2>
-        <p className="mt-3 text-center text-sm text-zinc-400">
-          Everything you need to know about GTM PRO.
-        </p>
+        {/* Section Header */}
+        <div className="text-center">
+          <p className="text-sm font-black tracking-wider text-[#E8C97A] uppercase">
+            FAQ
+          </p>
+          <h2 className="mt-3 text-4xl font-black tracking-tight text-white sm:text-5xl">
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-3 text-sm sm:text-base text-zinc-400">
+            Everything you need to know about GTM PRO.
+          </p>
+        </div>
 
-        {/* Category Filter Pills */}
-        <div className="mx-auto mt-8 grid max-w-md grid-cols-2 gap-2 sm:flex sm:max-w-none sm:flex-wrap sm:justify-center">
-          {categories.map((c) => (
+        {/* Category Tabs */}
+        <div className="mt-10 flex flex-wrap justify-center gap-2">
+          {categories.map((cat) => (
             <button
-              key={c.key}
+              key={cat.key}
               onClick={() => {
-                setActiveCat(c.key);
+                setActiveCat(cat.key);
                 setOpenId(null);
               }}
-              className={`w-full rounded-full px-5 py-2.5 text-center text-xs font-bold tracking-wide transition-all sm:w-auto ${
-                activeCat === c.key
-                  ? "bg-gradient-to-b from-[#F0D896] to-[#C9A84C] text-zinc-950 shadow-md font-black"
-                  : "bg-white/[0.04] text-zinc-300 ring-1 ring-white/10 hover:text-white"
+              className={`rounded-2xl px-5 py-2.5 text-xs font-bold transition-all cursor-pointer ${
+                activeCat === cat.key
+                  ? "bg-[#C9A84C] text-black shadow-lg shadow-[#C9A84C]/20"
+                  : "bg-white/[0.04] text-zinc-400 hover:text-white hover:bg-white/[0.08]"
               }`}
             >
-              {c.label}
+              {cat.label}
             </button>
           ))}
         </div>
@@ -192,28 +196,22 @@ export default function FaqSection() {
             return (
               <div
                 key={item.id}
-                className={`overflow-hidden rounded-3xl border bg-white/[0.03] transition-colors ${
-                  isOpen ? "border-[#C9A84C]/40 bg-[#C9A84C]/[0.02]" : "border-white/10"
-                }`}
+                className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] transition-colors hover:border-[#C9A84C]/30"
               >
                 <button
+                  type="button"
                   onClick={() => setOpenId(isOpen ? null : item.id)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-4 text-left font-black text-white hover:text-[#E8C97A] transition-colors"
+                  className="flex w-full items-center justify-between p-5 text-left cursor-pointer"
                 >
-                  <span className="text-sm sm:text-base">{item.q}</span>
-                  <span
-                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs transition-transform ${
-                      isOpen
-                        ? "bg-[#C9A84C] text-black rotate-180 font-black"
-                        : "bg-white/10 text-zinc-400"
-                    }`}
-                  >
+                  <span className="text-sm sm:text-base font-bold text-white pr-4">
+                    {item.q}
+                  </span>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 text-zinc-400 text-xs font-bold">
                     {isOpen ? "−" : "+"}
                   </span>
                 </button>
-
                 {isOpen && (
-                  <div className="border-t border-white/10 px-6 py-4 text-xs sm:text-sm leading-relaxed text-zinc-400">
+                  <div className="border-t border-white/10 px-5 pb-5 pt-3 text-xs sm:text-sm leading-relaxed text-zinc-300">
                     {item.a}
                   </div>
                 )}
@@ -222,15 +220,14 @@ export default function FaqSection() {
           })}
         </div>
 
-        <div className="mt-8 text-center">
-          <a
-            href="https://t.me/abangrimba"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/[0.04] px-6 py-3 text-sm font-black text-white ring-1 ring-white/10 transition-colors hover:bg-white/[0.08]"
+        {/* Bottom Button: Browse All Questions -> /faq */}
+        <div className="mt-10 text-center">
+          <Link
+            href="/faq"
+            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-8 py-3.5 text-xs sm:text-sm font-black text-zinc-950 shadow-xl shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
           >
-            Have More Questions? Ask on Telegram
-          </a>
+            <span>Browse All Questions →</span>
+          </Link>
         </div>
       </div>
     </section>

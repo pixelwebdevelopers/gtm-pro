@@ -35,7 +35,7 @@ export default function WhatsNewSection() {
             <span>Architecture Upgrades</span>
           </div>
           <h2 className="section-title">
-            What’s New in <span className="gold-text">GTM PRO v4.2.7</span>
+            What’s New in <span className="gold-text">GTM PRO v1.0</span>
           </h2>
           <p className="section-subtitle">
             Our latest release focuses on enhanced server license security, resilient VPS heartbeat

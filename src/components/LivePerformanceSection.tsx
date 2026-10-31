@@ -9,21 +9,21 @@ export default function LivePerformanceSection() {
       <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <p className="text-sm font-black tracking-wider text-[#E8C97A] uppercase">
-            Live Results
+            LIVE RESULTS
           </p>
           <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl text-white">
-            Real Results. Real Users.
+            Don&apos;t Take Our Word for It. See It.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-zinc-300 sm:text-lg">
-            See live account updates, user feedback, and trading results shared by the GTM PRO community on Telegram.
+            Real account updates, client results and trade screenshots, shared openly on our Telegram channel. Winning days and tough days, nothing hidden.
           </p>
         </div>
 
         <a
-          href="https://t.me/abangrimba"
+          href="https://t.me/GTM_PRO"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center justify-center gap-2 self-start rounded-2xl bg-gradient-to-b from-[#7FD1F7] to-[#0E96D6] px-7 py-4 text-sm font-black text-white shadow-2xl shadow-[#0E96D6]/20 transition-transform hover:brightness-110 active:scale-[0.98] md:self-auto"
+          className="inline-flex shrink-0 items-center justify-center gap-2.5 self-start rounded-2xl bg-gradient-to-b from-[#7FD1F7] to-[#0E96D6] px-7 py-4 text-sm font-black text-white shadow-2xl shadow-[#0E96D6]/20 transition-transform hover:brightness-110 active:scale-[0.98] md:self-auto cursor-pointer"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M21.5 2L2 9.5l7 3.5 3.5 7L21.5 2z" />

@@ -28,7 +28,7 @@ export default function CtaSection() {
           </h2>
 
           <p className="text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto mb-10 leading-relaxed">
-            Eliminate emotional guesswork and inconsistent manual trades. Deploy GTM PRO v4.2.7
+            Eliminate emotional guesswork and inconsistent manual trades. Deploy GTM PRO v1.0
             today with dual straddles, synchronized basket recovery, and 24/7 equity safeguards.
           </p>
 
@@ -42,7 +42,7 @@ export default function CtaSection() {
             </a>
 
             <a
-              href="https://t.me/abangrimba"
+              href="https://t.me/Ryan_Mitchell_GTMPRO"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline-gold !py-3.5 !px-8 text-sm md:text-base font-bold"
