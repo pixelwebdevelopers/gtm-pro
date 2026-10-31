@@ -72,9 +72,9 @@ export default function DownloadsSection() {
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
                 <span className="text-xs text-zinc-500 font-mono">v1.0 (Official)</span>
                 <a
-                  href="#pricing"
-                  onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-md shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all"
+                  href="/downloads/GTM_PRO_EA_v1.0.ex5"
+                  download="GTM_PRO_EA_v1.0.ex5"
+                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-md shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
                 >
                   Download
                 </a>
@@ -127,7 +127,7 @@ export default function DownloadsSection() {
               <div>
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-3 py-1 text-[10px] font-black uppercase text-[#E8C97A]">
-                    METATRADER 5 · v1.0
+                    METATRADER 5 · V1.1
                   </span>
                 </div>
                 <h4 className="mt-4 text-lg font-black text-white">GTM Bull — BUY Only</h4>
@@ -135,7 +135,7 @@ export default function DownloadsSection() {
                   Trades BUY cycles only. Ideal when you want to follow gold&apos;s upside.
                 </p>
                 <div className="mt-3 font-mono text-[11px] text-zinc-500">
-                  File name: <span className="text-zinc-300 font-bold">GTM_Bull_v1.0.ex5</span>
+                  File name: <span className="text-zinc-300 font-bold">GTM_Bull_v1.1.ex5</span>
                 </div>
                 <div className="mt-3 text-[11px] text-[#E8C97A] font-semibold">
                   🔑 License key required
@@ -143,11 +143,11 @@ export default function DownloadsSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                <span className="text-xs text-zinc-500 font-mono">Included in Unlimited</span>
+                <span className="text-xs text-zinc-500 font-mono">v1.1 (Included in Unlimited)</span>
                 <a
-                  href="#pricing"
-                  onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-md shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all"
+                  href="/downloads/GTM_Bull_v1.1.ex5"
+                  download="GTM_Bull_v1.1.ex5"
+                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-md shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
                 >
                   Download
                 </a>
@@ -159,7 +159,7 @@ export default function DownloadsSection() {
               <div>
                 <div className="flex items-center justify-between">
                   <span className="rounded-full bg-[#C9A84C]/15 border border-[#C9A84C]/30 px-3 py-1 text-[10px] font-black uppercase text-[#E8C97A]">
-                    METATRADER 5 · v1.0
+                    METATRADER 5 · V1.1
                   </span>
                 </div>
                 <h4 className="mt-4 text-lg font-black text-white">GTM Bear — SELL Only</h4>
@@ -167,7 +167,7 @@ export default function DownloadsSection() {
                   Trades SELL cycles only. Ideal when you want to follow gold&apos;s downside.
                 </p>
                 <div className="mt-3 font-mono text-[11px] text-zinc-500">
-                  File name: <span className="text-zinc-300 font-bold">GTM_Bear_v1.0.ex5</span>
+                  File name: <span className="text-zinc-300 font-bold">GTM_Bear_v1.1.ex5</span>
                 </div>
                 <div className="mt-3 text-[11px] text-[#E8C97A] font-semibold">
                   🔑 License key required
@@ -175,11 +175,11 @@ export default function DownloadsSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                <span className="text-xs text-zinc-500 font-mono">Included in Unlimited</span>
+                <span className="text-xs text-zinc-500 font-mono">v1.1 (Included in Unlimited)</span>
                 <a
-                  href="#pricing"
-                  onClick={scrollToPricing}
-                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-md shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all"
+                  href="/downloads/GTM_Bear_v1.1.ex5"
+                  download="GTM_Bear_v1.1.ex5"
+                  className="inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-5 py-2.5 text-xs font-black text-zinc-950 shadow-md shadow-[#C9A84C]/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
                 >
                   Download
                 </a>

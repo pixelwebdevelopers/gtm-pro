@@ -69,7 +69,7 @@ export default function HowItTradesSection() {
                   {st.num}
                 </span>
                 <h3 className="mt-4 text-base font-bold text-white group-hover:text-[#E8C97A] transition-colors">
-                  {st.num} · {st.title}
+                  {st.title}
                 </h3>
                 <p className="mt-2 text-xs leading-relaxed text-zinc-400 font-medium">
                   {st.desc}

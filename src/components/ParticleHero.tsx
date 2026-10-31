@@ -213,7 +213,23 @@ export default function ParticleHero() {
     };
   }, []);
 
-  const chartUrl = `https://www.tradingview-widget.com/embed-widget/advanced-chart/?locale=en#%7B%22autosize%22%3Atrue%2C%22symbol%22%3A%22OANDA%3AXAUUSD%22%2C%22interval%22%3A%22${activeInterval}%22%2C%22timezone%22%3A%22Etc%2FUTC%22%2C%22theme%22%3A%22dark%22%2C%22style%22%3A%221%22%2C%22hide_top_toolbar%22%3Afalse%2C%22hide_legend%22%3Afalse%2C%22allow_symbol_change%22%3Afalse%2C%22save_image%22%3Afalse%2C%22calendar%22%3Afalse%2C%22support_host%22%3A%22https%3A%2F%2Fwww.tradingview.com%22%7D`;
+  const chartConfig = {
+    autosize: true,
+    symbol: "OANDA:XAUUSD",
+    interval: activeInterval,
+    timezone: "Etc/UTC",
+    theme: "dark",
+    style: "1",
+    locale: "en",
+    enable_publishing: false,
+    hide_top_toolbar: false,
+    hide_legend: false,
+    allow_symbol_change: false,
+    save_image: false,
+    calendar: false,
+    support_host: "https://www.tradingview.com",
+  };
+  const chartUrl = `https://www.tradingview-widget.com/embed-widget/advanced-chart/?locale=en#${encodeURIComponent(JSON.stringify(chartConfig))}`;
 
   return (
     <section className="relative min-h-[calc(100vh-76px)] overflow-hidden flex items-center py-10 lg:py-16">

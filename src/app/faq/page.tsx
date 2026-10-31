@@ -14,6 +14,7 @@ interface HelpQuestion {
     text: string;
     href: string;
     isExternal?: boolean;
+    download?: boolean;
     disabled?: boolean;
   };
 }
@@ -42,7 +43,7 @@ const all71Faqs: HelpQuestion[] = [
     category: "Getting Started",
     q: "Does GTM PRO work on MetaTrader 4 or MetaTrader 5?",
     a: "Both. We provide a MetaTrader 5 version (.ex5) and a MetaTrader 4 version (.ex4, coming soon). Download the one that matches your platform from our official download links.",
-    button: { text: "Download for MetaTrader 5", href: "/#download" },
+    button: { text: "Download for MetaTrader 5", href: "/downloads/GTM_PRO_EA_v1.0.ex5", download: true },
   },
   {
     id: "gs-3",
@@ -321,7 +322,7 @@ const all71Faqs: HelpQuestion[] = [
     category: "Setup & Installation",
     q: "How do I download the GTM PRO file?",
     a: "Download GTM PRO from our official download links: choose the MetaTrader 5 version (.ex5) or the MetaTrader 4 version (.ex4, coming soon) for your platform. Downloads are open, so no login is needed. Always download from our official website to avoid fake copies.",
-    button: { text: "Download for MetaTrader 5", href: "/#download" },
+    button: { text: "Download for MetaTrader 5", href: "/downloads/GTM_PRO_EA_v1.0.ex5", download: true },
   },
   {
     id: "si-2",
@@ -677,7 +678,20 @@ export default function HelpCenterPage() {
                       {/* Golden Button inside answer if defined */}
                       {faq.button && (
                         <div>
-                          {faq.button.isExternal ? (
+                          {faq.button.download ? (
+                            <a
+                              href={faq.button.href}
+                              download="GTM_PRO_EA_v1.0.ex5"
+                              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95 cursor-pointer"
+                            >
+                              <span>{faq.button.text}</span>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                              </svg>
+                            </a>
+                          ) : faq.button.isExternal ? (
                             <a
                               href={faq.button.href}
                               target="_blank"

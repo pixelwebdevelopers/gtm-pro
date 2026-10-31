@@ -5,24 +5,51 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-interface PresetItem {
+interface PresetPair {
+  id: number;
   pair: string;
-  category: "Gold & Metals" | "Forex Majors" | "Forex Crosses";
-  status: "Validated" | "Pending";
+  status500: "Validated" | "Pending";
+  status2000: "Validated" | "Pending";
 }
 
-const presetPairs: PresetItem[] = [
-  { pair: "XAUUSD", category: "Gold & Metals", status: "Validated" },
-  { pair: "XAGUSD", category: "Gold & Metals", status: "Pending" },
-  { pair: "EURUSD", category: "Forex Majors", status: "Validated" },
-  { pair: "GBPUSD", category: "Forex Majors", status: "Validated" },
-  { pair: "USDJPY", category: "Forex Majors", status: "Validated" },
-  { pair: "AUDUSD", category: "Forex Majors", status: "Pending" },
-  { pair: "USDCAD", category: "Forex Majors", status: "Pending" },
-  { pair: "USDCHF", category: "Forex Majors", status: "Pending" },
-  { pair: "NZDUSD", category: "Forex Majors", status: "Pending" },
-  { pair: "EURJPY", category: "Forex Crosses", status: "Validated" },
-  { pair: "GBPJPY", category: "Forex Crosses", status: "Pending" },
+const presetPairs: PresetPair[] = [
+  { id: 1, pair: "XAUUSD", status500: "Pending", status2000: "Pending" },
+  { id: 2, pair: "AUDNZD", status500: "Pending", status2000: "Pending" },
+  { id: 3, pair: "EURGBP", status500: "Validated", status2000: "Validated" },
+  { id: 4, pair: "EURCHF", status500: "Validated", status2000: "Validated" },
+  { id: 5, pair: "AUDCAD", status500: "Validated", status2000: "Pending" },
+  { id: 6, pair: "NZDCAD", status500: "Validated", status2000: "Pending" },
+  { id: 7, pair: "AUDCHF", status500: "Validated", status2000: "Validated" },
+  { id: 8, pair: "EURCAD", status500: "Validated", status2000: "Validated" },
+  { id: 9, pair: "GBPCAD", status500: "Validated", status2000: "Pending" },
+  { id: 10, pair: "CHFJPY", status500: "Validated", status2000: "Pending" },
+  { id: 11, pair: "NZDCHF", status500: "Pending", status2000: "Pending" },
+  { id: 12, pair: "CADCHF", status500: "Validated", status2000: "Validated" },
+  { id: 13, pair: "EURAUD", status500: "Validated", status2000: "Validated" },
+  { id: 14, pair: "GBPAUD", status500: "Validated", status2000: "Validated" },
+  { id: 15, pair: "EURNZD", status500: "Validated", status2000: "Validated" },
+  { id: 16, pair: "GBPNZD", status500: "Validated", status2000: "Pending" },
+  { id: 17, pair: "AUDUSD", status500: "Validated", status2000: "Pending" },
+  { id: 18, pair: "NZDUSD", status500: "Validated", status2000: "Validated" },
+  { id: 19, pair: "USDCAD", status500: "Pending", status2000: "Pending" },
+  { id: 20, pair: "USDCHF", status500: "Pending", status2000: "Pending" },
+  { id: 21, pair: "EURUSD", status500: "Validated", status2000: "Validated" },
+  { id: 22, pair: "AUDJPY", status500: "Pending", status2000: "Pending" },
+  { id: 23, pair: "CADJPY", status500: "Pending", status2000: "Pending" },
+  { id: 24, pair: "EURJPY", status500: "Validated", status2000: "Validated" },
+  { id: 25, pair: "GBPJPY", status500: "Validated", status2000: "Validated" },
+  { id: 26, pair: "USDJPY", status500: "Pending", status2000: "Pending" },
+  { id: 27, pair: "GBPUSD", status500: "Validated", status2000: "Validated" },
+  { id: 28, pair: "GBPCHF", status500: "Validated", status2000: "Validated" },
+  { id: 29, pair: "SGDJPY", status500: "Pending", status2000: "Pending" },
+  { id: 30, pair: "NZDJPY", status500: "Validated", status2000: "Validated" },
+  { id: 31, pair: "USDSGD", status500: "Pending", status2000: "Pending" },
+  { id: 32, pair: "AUDSGD", status500: "Pending", status2000: "Pending" },
+  { id: 33, pair: "NZDSGD", status500: "Pending", status2000: "Pending" },
+  { id: 34, pair: "EURSGD", status500: "Pending", status2000: "Pending" },
+  { id: 35, pair: "GBPSGD", status500: "Pending", status2000: "Pending" },
+  { id: 36, pair: "CHFSGD", status500: "Pending", status2000: "Pending" },
+  { id: 37, pair: "USDHKD", status500: "Pending", status2000: "Pending" },
 ];
 
 export default function DownloadSetFilesPage() {
@@ -82,8 +109,12 @@ export default function DownloadSetFilesPage() {
     setTimeout(() => setDownloadSuccess(null), 3000);
   };
 
-  const validatedCount = presetPairs.filter((p) => p.status === "Validated").length;
-  const pendingCount = presetPairs.filter((p) => p.status === "Pending").length;
+  const validatedCount = presetPairs.filter(
+    (p) => (leverage === "1:500" ? p.status500 : p.status2000) === "Validated"
+  ).length;
+  const pendingCount = presetPairs.filter(
+    (p) => (leverage === "1:500" ? p.status500 : p.status2000) === "Pending"
+  ).length;
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#050505] text-white">
@@ -260,7 +291,8 @@ export default function DownloadSetFilesPage() {
         {/* File Table / Rows */}
         <div className="mt-4 divide-y divide-white/5 rounded-2xl border border-white/10 bg-zinc-950/80 overflow-hidden shadow-xl">
           {presetPairs.map((p) => {
-            const levFormatted = leverage.replace(":", "_");
+            const status = leverage === "1:500" ? p.status500 : p.status2000;
+            const levFormatted = leverage === "1:500" ? "1_500" : "1_2000";
             const filename = `${p.pair}_GTM_PRO_50K_${platform}_${levFormatted}.set`;
 
             return (
@@ -269,18 +301,22 @@ export default function DownloadSetFilesPage() {
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:px-6 hover:bg-white/[0.02] transition-colors"
               >
                 <div className="flex items-center gap-3">
+                  <span className="w-8 text-xs font-mono font-bold text-zinc-500">
+                    #{p.id}
+                  </span>
+
                   <span className="w-20 text-sm font-black text-white font-mono">
                     {p.pair}
                   </span>
 
                   <span
                     className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider border ${
-                      p.status === "Validated"
+                      status === "Validated"
                         ? "bg-emerald-500/15 border-emerald-500/30 text-emerald-400"
                         : "bg-amber-500/15 border-amber-500/30 text-amber-400"
                     }`}
                   >
-                    {p.status === "Validated" ? "✅ Validated" : "⏳ Pending"}
+                    {status === "Validated" ? "✅ Validated" : "⏳ Pending"}
                   </span>
 
                   <span className="hidden md:inline text-xs text-zinc-500 font-mono truncate max-w-xs">

@@ -242,7 +242,7 @@ export default function ChartComparisonSection() {
                 <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 font-bold text-xs border border-emerald-500/30">
                   01
                 </span>
-                <h3 className="text-sm font-bold text-white">01 · Where It Entered</h3>
+                <h3 className="text-sm font-bold text-white">Where It Entered</h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-zinc-400">
                 No hesitation. The straddle triggers automatically the moment price breaks above or below the trap, and the opposite order is cancelled.
@@ -254,7 +254,7 @@ export default function ChartComparisonSection() {
                 <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-amber-500/20 text-[#E8C97A] font-bold text-xs border border-amber-500/30">
                   02
                 </span>
-                <h3 className="text-sm font-bold text-white">02 · Where It Added Layers</h3>
+                <h3 className="text-sm font-bold text-white">Where It Added Layers</h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-zinc-400">
                 When price pulled back, GTM PRO added positions at fixed spacing and controlled lot steps, exactly as its rules define.
@@ -266,7 +266,7 @@ export default function ChartComparisonSection() {
                 <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#C9A84C]/20 text-[#FFF0B8] font-bold text-xs border border-[#C9A84C]/40">
                   03
                 </span>
-                <h3 className="text-sm font-bold text-white">03 · Where It Closed</h3>
+                <h3 className="text-sm font-bold text-white">Where It Closed</h3>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-zinc-400">
                 All positions closed together at one basket take profit. The cycle reset and a new one began automatically.
