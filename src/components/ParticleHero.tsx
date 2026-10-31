@@ -228,6 +228,9 @@ export default function ParticleHero() {
     save_image: false,
     calendar: false,
     support_host: "https://www.tradingview.com",
+    overrides: {
+      "mainSeriesProperties.statusViewStyle.symbolTextSource": "ticker-and-description",
+    },
   };
   const chartUrl = `https://www.tradingview-widget.com/embed-widget/advanced-chart/?locale=en#${encodeURIComponent(JSON.stringify(chartConfig))}`;
 
@@ -382,7 +385,7 @@ export default function ParticleHero() {
           </div>
 
           <p className="mt-3 px-2 text-center sm:text-left text-xs leading-relaxed text-zinc-400">
-            Live chart for real-time market reference only. GTM PRO executes autonomously inside your own MetaTrader terminal, on your PC or VPS.
+            Real-time OANDA Gold Spot (XAUUSD) feed for market reference. GTM PRO executes autonomously inside your own MetaTrader terminal, on your PC or VPS.
           </p>
         </div>
       </div>
