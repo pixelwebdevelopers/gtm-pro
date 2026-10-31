@@ -329,31 +329,34 @@ export default function PricingSection() {
         {/* 9 Payment Popup (USDT TRC20 Modal) */}
         {paymentModalOpen && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md overflow-y-auto"
+            className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 sm:p-6 backdrop-blur-md flex justify-center items-start sm:items-center"
             onClick={() => setPaymentModalOpen(false)}
           >
             <div
-              className="relative w-full max-w-lg rounded-3xl border border-[#C9A84C]/40 bg-[#0d0d10] p-6 sm:p-8 shadow-2xl shadow-black my-8"
+              className="relative w-full max-w-lg rounded-3xl border border-[#C9A84C]/40 bg-[#0d0d10] p-5 sm:p-8 shadow-2xl shadow-black my-4 sm:my-8"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
               <button
                 type="button"
                 onClick={() => setPaymentModalOpen(false)}
-                className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
-                aria-label="Close"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-zinc-900/95 text-zinc-300 hover:text-white hover:bg-white/20 transition-all cursor-pointer shadow-lg active:scale-95"
+                aria-label="Close modal"
               >
-                ✕
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
               </button>
 
               {/* Header */}
-              <div className="border-b border-white/10 pb-4">
-                <h3 className="text-xl sm:text-2xl font-black text-white">
+              <div className="border-b border-white/10 pb-4 pr-10">
+                <h3 className="text-xl sm:text-2xl font-black text-white leading-tight">
                   {selectedPlan.name === "Source Code"
                     ? "Purchase GTM PRO v1.0 — Source Code"
                     : "Purchase GTM PRO v1.0"}
                 </h3>
-                <p className="mt-1 text-xs sm:text-sm text-zinc-400">
+                <p className="mt-1.5 text-xs sm:text-sm text-zinc-400">
                   Pay with USDT, then confirm on Telegram to activate your license.
                 </p>
               </div>
@@ -446,6 +449,17 @@ export default function PricingSection() {
                   </svg>
                   <span>✈ Confirm Payment on Telegram</span>
                 </a>
+              </div>
+
+              {/* Close Button at bottom */}
+              <div className="mt-3 text-center">
+                <button
+                  type="button"
+                  onClick={() => setPaymentModalOpen(false)}
+                  className="text-xs font-semibold text-zinc-400 hover:text-white py-1.5 px-3 transition-colors cursor-pointer"
+                >
+                  ✕ Close Window
+                </button>
               </div>
             </div>
           </div>

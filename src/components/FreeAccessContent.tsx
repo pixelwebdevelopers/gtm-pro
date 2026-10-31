@@ -164,10 +164,7 @@ Thank you.
           {/* Box A — Vantage Markets */}
           <div className="rounded-3xl border border-white/15 bg-zinc-950/80 p-6 sm:p-7 shadow-xl flex flex-col justify-between hover:border-[#C9A84C]/40 transition-colors">
             <div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black tracking-wider text-[#E8C97A] uppercase">
-                  BOX A — PARTNER BROKER
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 text-[10px] font-bold text-emerald-400 uppercase">
                   Verified
                 </span>
@@ -236,10 +233,7 @@ Thank you.
           {/* Box B — Exness */}
           <div className="rounded-3xl border border-white/15 bg-zinc-950/80 p-6 sm:p-7 shadow-xl flex flex-col justify-between hover:border-[#C9A84C]/40 transition-colors">
             <div>
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black tracking-wider text-[#E8C97A] uppercase">
-                  BOX B — PARTNER BROKER
-                </span>
+              <div className="flex items-center justify-end">
                 <span className="rounded-full bg-emerald-500/15 border border-emerald-500/30 px-2.5 py-0.5 text-[10px] font-bold text-emerald-400 uppercase">
                   Verified
                 </span>
@@ -509,20 +503,24 @@ Thank you.
       {/* POPUP A — VANTAGE MARKETS: ALREADY REGISTERED? */}
       {popupAOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 sm:p-6 backdrop-blur-md flex justify-center items-start sm:items-center"
           onClick={() => setPopupAOpen(false)}
         >
           <div
-            className="relative w-full max-w-lg rounded-3xl border border-[#C9A84C]/40 bg-[#0d0d10] p-6 sm:p-8 shadow-2xl shadow-black my-8"
+            className="relative w-full max-w-lg rounded-3xl border border-[#C9A84C]/40 bg-[#0d0d10] p-5 sm:p-8 shadow-2xl shadow-black my-4 sm:my-8"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={() => setPopupAOpen(false)}
-              className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 hover:text-white"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-zinc-900/95 text-zinc-300 hover:text-white hover:bg-white/20 transition-all cursor-pointer shadow-lg active:scale-95"
+              aria-label="Close modal"
             >
-              ✕
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
 
             <h3 className="text-xl sm:text-2xl font-black text-white pr-8">
@@ -601,20 +599,24 @@ Thank you.
       {/* POPUP B — EXNESS: ALREADY HAVE AN EXNESS ACCOUNT? */}
       {popupBOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-50 overflow-y-auto bg-black/85 p-3 sm:p-6 backdrop-blur-md flex justify-center items-start sm:items-center"
           onClick={() => setPopupBOpen(false)}
         >
           <div
-            className="relative w-full max-w-2xl rounded-3xl border border-[#C9A84C]/40 bg-[#0d0d10] p-6 sm:p-8 shadow-2xl shadow-black my-8 max-h-[90vh] overflow-y-auto"
+            className="relative w-full max-w-2xl rounded-3xl border border-[#C9A84C]/40 bg-[#0d0d10] p-5 sm:p-8 shadow-2xl shadow-black my-4 sm:my-8 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               type="button"
               onClick={() => setPopupBOpen(false)}
-              className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 hover:text-white"
+              className="absolute top-4 right-4 sm:top-5 sm:right-5 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-zinc-900/95 text-zinc-300 hover:text-white hover:bg-white/20 transition-all cursor-pointer shadow-lg active:scale-95"
+              aria-label="Close modal"
             >
-              ✕
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
 
             <h3 className="text-xl sm:text-2xl font-black text-white pr-8">
@@ -774,8 +776,9 @@ Thank you.
         >
           <div className="relative max-h-[92vh] max-w-sm w-full h-[85vh]">
             <button
+              type="button"
               onClick={() => setPreviewImage(null)}
-              className="absolute -top-10 right-0 text-white font-bold text-sm bg-white/20 px-3 py-1 rounded-full"
+              className="absolute top-2 right-2 z-20 text-white font-bold text-xs bg-black/80 border border-white/20 px-3.5 py-1.5 rounded-full shadow-lg cursor-pointer"
             >
               Close ✕
             </button>
