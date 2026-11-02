@@ -11,7 +11,7 @@ export default function LivePerformanceSection() {
           <p className="text-sm font-black tracking-wider text-[#E8C97A] uppercase">
             LIVE RESULTS
           </p>
-          <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl text-white">
+          <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-5xl text-white">
             Don&apos;t Take Our Word for It. See It.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-zinc-300 sm:text-lg">

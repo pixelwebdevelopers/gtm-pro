@@ -1,18 +1,25 @@
 import { NextResponse } from "next/server";
-
-// Default fallback data (can be controlled via environment variables or license server proxy)
-let statsData = {
-  activatedToday: process.env.NEXT_PUBLIC_DEFAULT_ACTIVATED_TODAY
-    ? parseInt(process.env.NEXT_PUBLIC_DEFAULT_ACTIVATED_TODAY, 10)
-    : 17,
-  runningNow: process.env.NEXT_PUBLIC_DEFAULT_RUNNING_NOW
-    ? parseInt(process.env.NEXT_PUBLIC_DEFAULT_RUNNING_NOW, 10)
-    : 2037,
-  lastUpdated: new Date().toISOString(),
-};
+import { getSiteSettings, saveSiteSettings } from "@/lib/siteSettingsServer";
+import { verifyAdminRequest } from "@/lib/auth";
 
 export async function GET() {
-  return NextResponse.json(statsData);
+  try {
+    const settings = await getSiteSettings();
+    return NextResponse.json({
+      activatedToday: settings.stats.activatedToday,
+      runningNow: settings.stats.runningNow,
+      liveBadgeText: settings.stats.liveBadgeText,
+      activatedLabel: settings.stats.activatedLabel,
+      runningLabel: settings.stats.runningLabel,
+      lastUpdated: settings.updatedAt || new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("[LIVE_STATS_GET_ERROR]", error);
+    return NextResponse.json(
+      { activatedToday: 17, runningNow: 2037 },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: Request) {
@@ -20,19 +27,32 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { activatedToday, runningNow, adminKey } = body;
 
-    // Optional admin security check if ADMIN_SECRET is set
+    // Verify either via session cookie or legacy ADMIN_SECRET
+    const isAuthedSession = verifyAdminRequest(request);
     const expectedSecret = process.env.ADMIN_SECRET || "gtmpro-secret-2026";
-    if (adminKey && adminKey !== expectedSecret) {
+    const isAuthedKey = adminKey && adminKey === expectedSecret;
+
+    if (!isAuthedSession && !isAuthedKey) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    if (typeof activatedToday === "number") statsData.activatedToday = activatedToday;
-    if (typeof runningNow === "number") statsData.runningNow = runningNow;
-    statsData.lastUpdated = new Date().toISOString();
+    const current = await getSiteSettings();
+    const updatedStats = {
+      ...current.stats,
+      ...(typeof activatedToday === "number" ? { activatedToday } : {}),
+      ...(typeof runningNow === "number" ? { runningNow } : {}),
+    };
 
-    return NextResponse.json({ success: true, data: statsData });
+    await saveSiteSettings({
+      ...current,
+      stats: updatedStats,
+    });
+
+    return NextResponse.json({ success: true, data: updatedStats });
   } catch (error) {
-    return NextResponse.json({ error: "Invalid request payload" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request payload" },
+      { status: 400 }
+    );
   }
 }
-

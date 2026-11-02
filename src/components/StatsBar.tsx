@@ -1,30 +1,46 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { defaultStats, StatsSettings } from "@/lib/siteSettings";
 
 export default function StatsBar() {
-  const [activatedToday, setActivatedToday] = useState(17);
-  const [runningNow, setRunningNow] = useState(2037);
+  const [stats, setStats] = useState<StatsSettings>(defaultStats);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
-  const [newActivated, setNewActivated] = useState("17");
-  const [newRunning, setNewRunning] = useState("2037");
+  const [newActivated, setNewActivated] = useState(
+    String(defaultStats.activatedToday)
+  );
+  const [newRunning, setNewRunning] = useState(String(defaultStats.runningNow));
 
   useEffect(() => {
-    // Fetch live numbers from API if available
+    // Fetch live numbers from API (backed by MongoDB)
     fetch("/api/live-stats")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        if (data && typeof data.activatedToday === "number") {
-          setActivatedToday(data.activatedToday);
-          setNewActivated(String(data.activatedToday));
-        }
-        if (data && typeof data.runningNow === "number") {
-          setRunningNow(data.runningNow);
-          setNewRunning(String(data.runningNow));
+        if (data) {
+          setStats((prev) => ({
+            ...prev,
+            activatedToday:
+              typeof data.activatedToday === "number"
+                ? data.activatedToday
+                : prev.activatedToday,
+            runningNow:
+              typeof data.runningNow === "number"
+                ? data.runningNow
+                : prev.runningNow,
+            liveBadgeText: data.liveBadgeText || prev.liveBadgeText,
+            activatedLabel: data.activatedLabel || prev.activatedLabel,
+            runningLabel: data.runningLabel || prev.runningLabel,
+          }));
+          if (typeof data.activatedToday === "number") {
+            setNewActivated(String(data.activatedToday));
+          }
+          if (typeof data.runningNow === "number") {
+            setNewRunning(String(data.runningNow));
+          }
         }
       })
       .catch(() => {
-        // Fallback to initial values
+        // Fallback to defaultStats
       });
   }, []);
 
@@ -32,8 +48,8 @@ export default function StatsBar() {
     e.preventDefault();
     const act = parseInt(newActivated, 10);
     const run = parseInt(newRunning, 10);
-    if (!isNaN(act)) setActivatedToday(act);
-    if (!isNaN(run)) setRunningNow(run);
+    if (!isNaN(act)) setStats((prev) => ({ ...prev, activatedToday: act }));
+    if (!isNaN(run)) setStats((prev) => ({ ...prev, runningNow: run }));
 
     try {
       await fetch("/api/live-stats", {
@@ -48,7 +64,10 @@ export default function StatsBar() {
   };
 
   return (
-    <section id="stats" className="border-y border-[#C9A84C]/15 bg-[#C9A84C]/[0.04] px-5 py-6 sm:px-8">
+    <section
+      id="stats"
+      className="border-y border-[#C9A84C]/15 bg-[#C9A84C]/[0.04] px-5 py-6 sm:px-8"
+    >
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
         <button
           type="button"
@@ -61,17 +80,17 @@ export default function StatsBar() {
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(52,211,153,.9)]" />
           </span>
           <span className="text-[11px] font-black tracking-wider text-[#E8C97A] uppercase">
-            LIVE ACTIVITY
+            {stats.liveBadgeText}
           </span>
         </button>
 
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 sm:w-auto sm:max-w-none sm:gap-8">
           <div className="text-center">
             <p className="text-2xl font-black tracking-tight text-white sm:text-3xl">
-              {activatedToday.toLocaleString()}
+              {stats.activatedToday.toLocaleString()}
             </p>
             <p className="mt-0.5 text-[11px] font-bold tracking-wide text-zinc-400 uppercase">
-              GTM PRO Licenses Activated Today
+              {stats.activatedLabel}
             </p>
           </div>
 
@@ -79,10 +98,10 @@ export default function StatsBar() {
 
           <div className="text-center">
             <p className="text-2xl font-black tracking-tight text-white sm:text-3xl">
-              {runningNow.toLocaleString()}
+              {stats.runningNow.toLocaleString()}
             </p>
             <p className="mt-0.5 text-[11px] font-bold tracking-wide text-zinc-400 uppercase">
-              GTM PRO EAs Running Now
+              {stats.runningLabel}
             </p>
           </div>
         </div>
@@ -93,7 +112,9 @@ export default function StatsBar() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
           <div className="w-full max-w-md rounded-2xl border border-[#C9A84C]/40 bg-[#0c0a06] p-6 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
-              <h3 className="text-base font-bold text-white">Live Activity Admin Update</h3>
+              <h3 className="text-base font-bold text-white">
+                Live Activity Quick Update
+              </h3>
               <button
                 onClick={() => setAdminModalOpen(false)}
                 className="text-zinc-400 hover:text-white"
