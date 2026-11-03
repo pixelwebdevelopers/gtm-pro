@@ -57,18 +57,47 @@ export default function DownloadSetFilesPage() {
   const [platform, setPlatform] = useState<"MT5" | "MT4">("MT5");
   const [leverage, setLeverage] = useState<"1:500" | "1:2000">("1:500");
   const [licenseKey, setLicenseKey] = useState("");
+  const [downloadToken, setDownloadToken] = useState("");
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [unlockError, setUnlockError] = useState("");
   const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Restore unlock status from localStorage if previously verified
+  // Set browser tab title & restore unlock status if previously verified
   useEffect(() => {
+    document.title =
+      "GTM PRO v1.0 — 50K Preset Files | GoldTacticalMachine.com";
+
     try {
-      const saved = localStorage.getItem("gtm_preset_unlocked");
-      if (saved === "true") {
-        setIsUnlocked(true);
+      const savedToken = localStorage.getItem("gtm_preset_token");
+      if (savedToken) {
+        fetch(`/api/verify-license?token=${encodeURIComponent(savedToken)}`)
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data) => {
+            if (data?.valid) {
+              setIsUnlocked(true);
+              setDownloadToken(savedToken);
+            } else {
+              localStorage.removeItem("gtm_preset_token");
+              localStorage.removeItem("gtm_preset_unlocked");
+            }
+          })
+          .catch(() => {
+            if (localStorage.getItem("gtm_preset_unlocked") === "true") {
+              setIsUnlocked(true);
+              setDownloadToken(savedToken);
+            }
+          });
+      } else if (localStorage.getItem("gtm_preset_unlocked") === "true") {
+        fetch("/api/verify-license")
+          .then((res) => (res.ok ? res.json() : null))
+          .then((data) => {
+            if (data?.valid) {
+              setIsUnlocked(true);
+            }
+          })
+          .catch(() => {});
       }
     } catch {
       // LocalStorage might be restricted
@@ -87,13 +116,8 @@ export default function DownloadSetFilesPage() {
 
     setIsVerifying(true);
 
-    // Read configured key from client environment or fallback to default
-    const clientExpectedKey = (
-      process.env.NEXT_PUBLIC_PRESET_UNLOCK_KEY || "GTEA-J8M7B-SHVRL-3P9WK"
-    ).trim();
-
     try {
-      // Server-side verification via route handler
+      // Secure server-side verification via route handler
       const res = await fetch("/api/verify-license", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -103,29 +127,24 @@ export default function DownloadSetFilesPage() {
 
       if (res.ok && data.valid) {
         setIsUnlocked(true);
+        setDownloadToken(data.token || "");
         try {
+          localStorage.setItem("gtm_preset_token", data.token || "");
           localStorage.setItem("gtm_preset_unlocked", "true");
         } catch {
           // Ignore storage restrictions
         }
         setIsVerifying(false);
         return;
+      } else {
+        setUnlockError(
+          data.error ||
+            "Invalid license key. Please check your key or contact support to obtain one."
+        );
       }
     } catch {
-      // If server route is unavailable, fallback to client-side verification
-    }
-
-    // Direct client-side validation
-    if (cleaned.toUpperCase() === clientExpectedKey.toUpperCase()) {
-      setIsUnlocked(true);
-      try {
-        localStorage.setItem("gtm_preset_unlocked", "true");
-      } catch {
-        // Ignore storage restrictions
-      }
-    } else {
       setUnlockError(
-        "Invalid license key. Please check your key or contact support to obtain one."
+        "Connection error while verifying license key. Please try again."
       );
     }
     setIsVerifying(false);
@@ -133,8 +152,10 @@ export default function DownloadSetFilesPage() {
 
   const handleRelock = () => {
     setIsUnlocked(false);
+    setDownloadToken("");
     setLicenseKey("");
     try {
+      localStorage.removeItem("gtm_preset_token");
       localStorage.removeItem("gtm_preset_unlocked");
     } catch {
       // Ignore
@@ -165,12 +186,15 @@ export default function DownloadSetFilesPage() {
       return;
     }
 
-    // Download real MT5 .set file from public folder
+    // Download through protected server endpoint
     const levFormatted = leverage === "1:500" ? "1_500" : "1_2000";
-    const filePath = `/downloads/presets/${levFormatted}/${filename}`;
+    const tokenQuery = downloadToken
+      ? `&token=${encodeURIComponent(downloadToken)}`
+      : "";
+    const downloadUrl = `/api/download?file=${levFormatted}/${filename}${tokenQuery}`;
 
     const a = document.createElement("a");
-    a.href = filePath;
+    a.href = downloadUrl;
     a.download = filename;
     document.body.appendChild(a);
     a.click();
@@ -295,7 +319,7 @@ export default function DownloadSetFilesPage() {
                       type="text"
                       value={licenseKey}
                       onChange={(e) => setLicenseKey(e.target.value)}
-                      placeholder="GTEA-J8M7B-SHVRL-3P9WK"
+                      placeholder="e.g. GTEA-XXXXX-XXXXX-XXXXX"
                       className="w-full rounded-2xl border border-white/15 bg-black/80 px-4 py-3 text-xs sm:text-sm font-mono text-white placeholder-zinc-600 focus:border-[#C9A84C] focus:outline-none"
                     />
                     <button
@@ -402,7 +426,11 @@ export default function DownloadSetFilesPage() {
               <a
                 href={
                   isUnlocked
-                    ? `/downloads/presets/GTM_PRO_Presets_MT5_${levFormatted}.zip`
+                    ? `/api/download?file=GTM_PRO_Presets_MT5_${levFormatted}.zip${
+                        downloadToken
+                          ? `&token=${encodeURIComponent(downloadToken)}`
+                          : ""
+                      }`
                     : "#unlock-box"
                 }
                 onClick={(e) => {

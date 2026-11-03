@@ -1,4 +1,41 @@
 import { NextResponse } from "next/server";
+import {
+  createPresetDownloadToken,
+  verifyPresetDownloadToken,
+  PRESET_COOKIE_NAME,
+  PRESET_TOKEN_MAX_AGE,
+  parseCookies,
+} from "@/lib/auth";
+
+export async function GET(request: Request) {
+  try {
+    const url = new URL(request.url);
+    const tokenParam = url.searchParams.get("token");
+
+    const cookieHeader = request.headers.get("cookie");
+    const cookies = parseCookies(cookieHeader);
+    const cookieToken = cookies[PRESET_COOKIE_NAME];
+
+    const token = tokenParam || cookieToken;
+
+    if (token && verifyPresetDownloadToken(token)) {
+      return NextResponse.json({
+        valid: true,
+        authenticated: true,
+      });
+    }
+
+    return NextResponse.json(
+      { valid: false, authenticated: false },
+      { status: 401 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { valid: false, error: "Validation error" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -12,6 +49,7 @@ export async function POST(request: Request) {
       );
     }
 
+    // Keep key strictly on server (from environment or default fallback)
     const expectedKey = (
       process.env.PRESET_UNLOCK_KEY ||
       process.env.NEXT_PUBLIC_PRESET_UNLOCK_KEY ||
@@ -21,10 +59,26 @@ export async function POST(request: Request) {
     const inputKey = licenseKey.trim();
 
     if (inputKey.toUpperCase() === expectedKey.toUpperCase()) {
-      return NextResponse.json({
+      const token = createPresetDownloadToken();
+
+      const response = NextResponse.json({
         valid: true,
+        token,
         message: "License key verified successfully.",
       });
+
+      // Set cookie for browser file downloads
+      response.cookies.set({
+        name: PRESET_COOKIE_NAME,
+        value: token,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        path: "/",
+        maxAge: PRESET_TOKEN_MAX_AGE,
+      });
+
+      return response;
     }
 
     return NextResponse.json(
@@ -42,4 +96,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

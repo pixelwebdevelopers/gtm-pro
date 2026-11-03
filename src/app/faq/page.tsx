@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,6 +15,10 @@ interface HelpQuestion {
     href: string;
     isExternal?: boolean;
     download?: boolean;
+    disabled?: boolean;
+  };
+  secondaryButton?: {
+    text: string;
     disabled?: boolean;
   };
 }
@@ -44,6 +48,7 @@ const all71Faqs: HelpQuestion[] = [
     q: "Does GTM PRO work on MetaTrader 4 or MetaTrader 5?",
     a: "Both. We provide a MetaTrader 5 version (.ex5) and a MetaTrader 4 version (.ex4, coming soon). Download the one that matches your platform from our official download links.",
     button: { text: "Download for MetaTrader 5", href: "/downloads/GTM_PRO_EA_v1.0.ex5", download: true },
+    secondaryButton: { text: "Download for MetaTrader 4 — Coming Soon", disabled: true },
   },
   {
     id: "gs-3",
@@ -323,6 +328,7 @@ const all71Faqs: HelpQuestion[] = [
     q: "How do I download the GTM PRO file?",
     a: "Download GTM PRO from our official download links: choose the MetaTrader 5 version (.ex5) or the MetaTrader 4 version (.ex4, coming soon) for your platform. Downloads are open, so no login is needed. Always download from our official website to avoid fake copies.",
     button: { text: "Download for MetaTrader 5", href: "/downloads/GTM_PRO_EA_v1.0.ex5", download: true },
+    secondaryButton: { text: "Download for MetaTrader 4 — Coming Soon", disabled: true },
   },
   {
     id: "si-2",
@@ -492,6 +498,11 @@ export default function HelpCenterPage() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
   const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.title =
+      "GTM PRO Help Center — FAQ, Setup, Licensing & Troubleshooting";
+  }, []);
 
   const filteredFaqs = useMemo(() => {
     return all71Faqs.filter((item) => {
@@ -675,38 +686,50 @@ export default function HelpCenterPage() {
                     <div className="border-t border-white/10 p-5 pt-4 text-xs sm:text-sm text-zinc-300 leading-relaxed space-y-4">
                       <p>{faq.a}</p>
 
-                      {/* Golden Button inside answer if defined */}
-                      {faq.button && (
-                        <div>
-                          {faq.button.download ? (
-                            <a
-                              href={faq.button.href}
-                              download="GTM_PRO_EA_v1.0.ex5"
-                              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95 cursor-pointer"
+                      {/* Buttons inside answer if defined */}
+                      {(faq.button || faq.secondaryButton) && (
+                        <div className="flex flex-wrap items-center gap-2.5">
+                          {faq.button && (
+                            faq.button.download ? (
+                              <a
+                                href={faq.button.href}
+                                download="GTM_PRO_EA_v1.0.ex5"
+                                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95 cursor-pointer"
+                              >
+                                <span>{faq.button.text}</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                  <polyline points="7 10 12 15 17 10"></polyline>
+                                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                                </svg>
+                              </a>
+                            ) : faq.button.isExternal ? (
+                              <a
+                                href={faq.button.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95"
+                              >
+                                {faq.button.text}
+                              </a>
+                            ) : (
+                              <Link
+                                href={faq.button.href}
+                                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95"
+                              >
+                                {faq.button.text}
+                              </Link>
+                            )
+                          )}
+
+                          {faq.secondaryButton && (
+                            <button
+                              type="button"
+                              disabled
+                              className="inline-flex items-center justify-center rounded-xl bg-zinc-800/80 border border-white/5 px-4 py-2 text-xs font-bold text-zinc-400 cursor-not-allowed"
                             >
-                              <span>{faq.button.text}</span>
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                <polyline points="7 10 12 15 17 10"></polyline>
-                                <line x1="12" y1="15" x2="12" y2="3"></line>
-                              </svg>
-                            </a>
-                          ) : faq.button.isExternal ? (
-                            <a
-                              href={faq.button.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95"
-                            >
-                              {faq.button.text}
-                            </a>
-                          ) : (
-                            <Link
-                              href={faq.button.href}
-                              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-[#F0D896] to-[#C9A84C] px-4 py-2 text-xs font-black text-zinc-950 shadow hover:brightness-110 active:scale-95"
-                            >
-                              {faq.button.text}
-                            </Link>
+                              {faq.secondaryButton.text}
+                            </button>
                           )}
                         </div>
                       )}

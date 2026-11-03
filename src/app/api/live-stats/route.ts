@@ -23,18 +23,17 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  // Strict admin check on server — only authenticated admin sessions can modify live stats
+  if (!verifyAdminRequest(request)) {
+    return NextResponse.json(
+      { error: "Unauthorized. Administrator session required." },
+      { status: 401 }
+    );
+  }
+
   try {
     const body = await request.json();
-    const { activatedToday, runningNow, adminKey } = body;
-
-    // Verify either via session cookie or legacy ADMIN_SECRET
-    const isAuthedSession = verifyAdminRequest(request);
-    const expectedSecret = process.env.ADMIN_SECRET || "gtmpro-secret-2026";
-    const isAuthedKey = adminKey && adminKey === expectedSecret;
-
-    if (!isAuthedSession && !isAuthedKey) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const { activatedToday, runningNow } = body;
 
     const current = await getSiteSettings();
     const updatedStats = {
