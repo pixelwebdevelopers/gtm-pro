@@ -143,7 +143,7 @@ export default function DownloadsSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                <span className="text-xs text-zinc-500 font-mono">v1.1 (Included in Unlimited)</span>
+                <span className="text-xs text-zinc-500 font-mono">v1.1 (Official)</span>
                 <a
                   href="/downloads/GTM_Bull_v1.1.ex5"
                   download="GTM_Bull_v1.1.ex5"
@@ -175,7 +175,7 @@ export default function DownloadsSection() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between">
-                <span className="text-xs text-zinc-500 font-mono">v1.1 (Included in Unlimited)</span>
+                <span className="text-xs text-zinc-500 font-mono">v1.1 (Official)</span>
                 <a
                   href="/downloads/GTM_Bear_v1.1.ex5"
                   download="GTM_Bear_v1.1.ex5"
