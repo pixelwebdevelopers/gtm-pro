@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Outfit, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -66,11 +65,8 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         {children}
-        <Script
-          src="https://cdn.zanderio.ai/widget/loader.js"
-          data-id="wdg_dC5nmde4v6OZj4ksjSHE2qeC"
-          strategy="afterInteractive"
-        />
+        <script src="https://cdn.botpress.cloud/webchat/v5.0/inject.js" defer></script>
+        <script src="https://files.bpcontent.cloud/2026/11/05/11/20261105115711-SZXHMRV5.js" defer></script>
       </body>
     </html>
   );
